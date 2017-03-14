@@ -4,7 +4,9 @@
   "description": "Floodlight GUI using electron framework",
   "main": "main.js",
   "scripts": {
-    "test": "mocha"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/.bin/electron .",
+    "build-mac": "./node_modules/.bin/electron-packager . --overwrite --platform=darwin --arch=x64 --prune=true --out=release-builds"
   },
   "repository": {
     "type": "git",
@@ -20,5 +22,16 @@
   "bugs": {
     "url": "https://github.com/ermus19/floodgui/issues"
   },
-  "homepage": "https://github.com/ermus19/floodgui#readme"
+  "homepage": "https://github.com/ermus19/floodgui#readme",
+  "devDependencies": {
+    "electron": "^1.6.1",
+    "electron-packager": "^8.5.2",
+    "webpack": "^2.2.1"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "electron-config": "^0.2.1",
+    "jquery": "^3.1.1",
+    "vis": "^4.18.1"
+  }
 }
