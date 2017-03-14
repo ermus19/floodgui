@@ -1,0 +1,24 @@
+{
+  "name": "floodgui",
+  "version": "1.0.0",
+  "description": "Floodlight GUI using electron framework",
+  "main": "main.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ermus19/floodgui.git"
+  },
+  "keywords": [
+    "floodlight",
+    "sdn",
+    "electron"
+  ],
+  "author": "ermus19 <ermus19@hotmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ermus19/floodgui/issues"
+  },
+  "homepage": "https://github.com/ermus19/floodgui#readme"
+}
