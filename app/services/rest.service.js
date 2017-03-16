@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('rest.service.js',['ngResource'])
+angular.module('rest.service',['ngResource'])
 
 .factory('Test', ['$resource', function ($resource) {
     return function (ip) {

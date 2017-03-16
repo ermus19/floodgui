@@ -2,7 +2,7 @@
 
 angular.module('myApp.login.controller',[])
 
-.controller('login.controller', function($scope, $timeout, Test){
+.controller('loginController', function($scope, $timeout, Test){
 
     $scope.showLoading = false;
     $scope.submitLoading = false;

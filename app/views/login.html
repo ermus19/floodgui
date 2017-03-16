@@ -12,11 +12,11 @@
     <link rel="stylesheet" href="../styles/login.css">
   </head>
   <body>
-    <div class ="main" ng-controller="login.controller">
+    <div class ="main" ng-controller="loginController">
       <div id="buttons" ng-hide="showForm">
         <h1>Welcome!</h1><br><br>
         <p>Choose where the Floodlight SDN Controller is running:</p><br>
-        <button type="button" ng-click="onClickThis()" ng-disabled="thisClicked" class="btn btn-default btn-lg">
+        <button id="thisButton" type="button" ng-click="onClickThis()" ng-disabled="thisClicked" class="btn btn-default btn-lg">
           <span ng-hide="showLoading">
             This computer 
           </span>
@@ -25,7 +25,7 @@
             <i class="fa fa-spinner fa-spin"></i>
           </span> 
         </button>
-        <button type="button" ng-click="onClickOther()" ng-disabled="thisClicked" class="btn btn-default btn-lg">
+        <button id="otherButton" type="button" ng-click="onClickOther()" ng-disabled="thisClicked" class="btn btn-default btn-lg">
           Other computer
         </button>
         <br><br>
@@ -52,7 +52,7 @@
             <label class="example">For example "192.168.1.2"</label>
         </form>
         <br>
-        <button ng-click="onClickBack()" ng-disabled="submitLoading" type="button" class="btn btn-primary">
+        <button id="backButton" ng-click="onClickBack()" ng-disabled="submitLoading" type="button" class="btn btn-primary">
           Back
         </button>
       </div>
