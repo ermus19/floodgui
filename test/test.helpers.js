@@ -13,9 +13,9 @@ global.before(function () {
 
 exports.startApp = function () {
     if (process.platform === 'darwin') {
-        var appPath = `${__dirname}/../builds/Floodgui-darwin-x64/FloodGUI.app/Contents/MacOS/FloodGUI`;
+        var appPath = './builds/FloodGUI-darwin-x64/FloodGUI.app/Contents/MacOS/FloodGUI';
     } else if (process.platform === 'linux') {
-        var appPath = `${__dirname}/../builds/Floodgui-linux-x64/FloodGUI`;
+        var appPath = './builds/FloodGUI-linux-x64/FloodGUI';
     }
     var app = new Application({
         path: appPath,
