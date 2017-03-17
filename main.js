@@ -6,11 +6,11 @@ const {
 const url = require('url');
 const path = require('path');
 const Config = require('electron-config');
-var config = new Config();
+const config = new Config();
 
 if (config.size == 0) {
-  config.set('width', 1281);
-  config.set('height', 800);
+  config.set('width', 1023);
+  config.set('height', 700);
 }
 
 let win;
@@ -21,8 +21,8 @@ function createWindow() {
 
     width: config.get('width'),
     height: config.get('height'),
-    minWidth: 1281,
-    minHeight: 800
+    minWidth: 1023,
+    minHeight: 700
 
   });
 
@@ -46,7 +46,6 @@ function createWindow() {
 
   }));
 
-
   }
 
   //win.webContents.openDevTools();
@@ -65,6 +64,7 @@ function createWindow() {
   win.on('closed', () => {
     win = null;
   });
+
 };
 
 app.on('ready', createWindow);
