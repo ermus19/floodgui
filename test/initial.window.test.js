@@ -4,17 +4,20 @@ var helpers = require('./test.helpers');
 
 describe('Application default launch:', function () {
 
+  this.timeout(10000);
+
+
   var app = null;
 
   beforeEach(function () {
-    return helpers.startApp().then(function (startedApp){
+    return helpers.startApp().then(function (startedApp) {
       app = startedApp;
     });
   });
 
 
   afterEach(function () {
-   return helpers.stopApp(app);
+    return helpers.stopApp(app);
   });
 
   it('Shows an initial window', function () {
