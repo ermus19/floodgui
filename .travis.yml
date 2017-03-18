@@ -1,7 +1,6 @@
 language: node_js
 node_js:
     - "7"
-sudo: false
 os:
   - linux
   - osx
@@ -17,3 +16,7 @@ install:
 script:
   - npm run travis-build
   - npm test
+notifications:
+  email:
+    on_success: never
+    on_failure: change
