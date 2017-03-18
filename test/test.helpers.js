@@ -27,7 +27,6 @@ exports.startApp = function () {
     });
 };
 
-
 exports.stopApp = function (app) {
     if (!app || !app.isRunning()) {
         return;
