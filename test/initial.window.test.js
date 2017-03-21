@@ -20,7 +20,7 @@ describe('Application default launch:', function () {
     return helpers.stopApp(app);
   });
 
-  it('Shows an initial window', function () {
+  it('Shows an initial window without devTools', function () {
     return app.client.waitUntilWindowLoaded()
       .getWindowCount().should.eventually.equal(1)
       .browserWindow.isDevToolsOpened().should.eventually.be.false
@@ -37,18 +37,13 @@ describe('Application default launch:', function () {
   it('Window default size is used', function () {
     return app.client.waitUntilWindowLoaded()
       .browserWindow.getBounds().should.eventually.have.property('width').and.be.equal(1023)
-      .browserWindow.getBounds().should.eventually.have.property('height').and.be.equal(700)
+      .browserWindow.getBounds().should.eventually.have.property('height').and.be.equal(700);
   })
 
   it('Window title is Floodlight controller GUI', function () {
     return app.client.waitUntilWindowLoaded()
       .browserWindow.getTitle().should.eventually.be.equal('Floodlight controller GUI');
   });
-
-  it('Should keep bounds when resizing the window', function () {
-    return app.client.waitUntilWindowLoaded()
-      .browserWindow.set
-  })
 
   it('Should load login view', function () {
     return app.client.waitUntilWindowLoaded()
@@ -58,6 +53,20 @@ describe('Application default launch:', function () {
   it('Should have login form invisible', function () {
     return app.client.waitUntilWindowLoaded()
       .isVisible('.form').should.eventually.be.false;
+  });
+
+  it('Should set fullscreen mode', function () {
+    return app.client.waitUntilWindowLoaded()
+    .browserWindow.setFullScreen(true)
+    .browserWindow.isFullScreen().should.eventually.be.true
+  });
+
+  it('Should minimize and restore the window', function () {
+    return app.client.waitUntilWindowLoaded()
+    .browserWindow.minimize()
+    .browserWindow.isMinimized().should.eventually.be.true
+    .browserWindow.restore()
+    .browserWindow.isMinimized().should.eventually.be.false;
   });
 
 });

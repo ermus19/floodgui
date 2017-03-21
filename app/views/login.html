@@ -38,9 +38,9 @@
         <form class="form-inline" id="ipForm" name="ipForm" ng-model="ipForm" novalidate>
           <div class="form-group has-feedback" ng-class="{ 'has-error': ipForm.ip.$invalid && !ipForm.ip.$pristine && !ipForm.ip.$dirty, 'has-success': ipForm.ip.$valid }">
             <label for="ipAddress">IP address:</label>
-            <input class="form-control" name="ip" ng-model="ip" ng-model-options="{ debounce: 100 }" placeholder="0.0.0.0" ng-pattern= "ipPattern" ng-keypress="filterValue($event)" required></input>
+            <input class="form-control" name="ip" ng-model="ip" ng-model-options="{ debounce: 0 }" placeholder="0.0.0.0" ng-pattern= "ipPattern" ng-keypress="filterValue($event)" required></input>
           </div>
-            <button ng-click="onClickSubmit()" type="submit" class="btn btn-default" ng-disabled="ipForm.ip.$invalid || submitLoading">
+            <button id="submitButton" type="button" ng-click="onClickSubmit()" ng-disabled="ipForm.ip.$invalid || submitLoading" class="btn btn-default">
               <span ng-hide="submitLoading">
                 Submit
               </span>
