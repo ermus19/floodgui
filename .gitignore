@@ -9,5 +9,8 @@ node_modules
 # Builds directory 
 builds
 
+# Coverage tests directory
+coverage
+
 # Others
 .DS_Store
