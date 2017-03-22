@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.load.controller',[])
+angular.module('load.controller',[])
 
 .controller('load.controller', function($scope, Test){
 

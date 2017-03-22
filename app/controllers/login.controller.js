@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.login.controller',[])
+angular.module('login.controller',[])
 
 .controller('loginController', function($scope, $timeout, Test){
 
@@ -77,6 +77,7 @@ angular.module('myApp.login.controller',[])
         if((isNaN(input) && input != '.')|| ($event.keyCode == 32)){
 
             $event.preventDefault();
+            console.log("Input not valid");
 
         }
     };
