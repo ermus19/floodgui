@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+    - "7"
+os:
+  - osx
+branches:
+  except:
+  - master
+addons:
+  apt:
+    packages:
+      - xvfb
+install:
+  - npm install
+script:
+  - npm run travis-build
+  - npm test
+  - npm run karma
+notifications:
+  email: false
