@@ -30,7 +30,7 @@ function createWindow() {
     
     win.loadURL(url.format({
 
-    pathname: path.join(__dirname, './app/views/load.html'),
+    pathname: path.join(__dirname, './app/views/load.view.html'),
     protocol: 'file:',
     slashes: true
 
@@ -40,7 +40,7 @@ function createWindow() {
   
     win.loadURL(url.format({
 
-    pathname: path.join(__dirname, './app/views/login.html'),
+    pathname: path.join(__dirname, './app/views/login.view.html'),
     protocol: 'file:',
     slashes: true
 

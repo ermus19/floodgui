@@ -1,0 +1,52 @@
+body {
+  background-color: #999999;
+  font-family: 'Open Sans';
+  color: white;
+}
+
+.main{
+  margin-top: 150px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.main h1{
+  font-size: 60px;
+}
+
+input{
+  color: black;
+  background-color: white;
+  padding: 3px;
+}
+
+input.ng-dirty.ng-invalid{
+  border: 2px solid #ff8080;
+  background-color: #ff8080; 
+}
+
+input.ng-invalid:focus{
+  border: 2px solid cornflowerblue;
+  background-color: white;
+}
+
+input.ng-valid{
+  border: 2px solid #80ff80;
+  background-color: #80ff80;
+}
+
+.main button{
+  font-size: 18px;
+  margin: 5px;
+}
+
+label.example{
+  font-size: 12px;
+  display: block;
+}
+
+p.note{
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
