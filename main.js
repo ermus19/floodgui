@@ -26,7 +26,7 @@ function createWindow() {
 
   });
 
-  if(config.has('set') && config.get('set')){
+  if(config.has('safe') && config.get('safe')){
     
     win.loadURL(url.format({
 

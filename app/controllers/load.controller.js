@@ -2,11 +2,9 @@
 
 angular.module('load.controller', [])
 
-    .controller('load.controller', function ($scope, $timeout, Test) {
+    .controller('load.controller', function ($scope, $timeout, Test, configService) {
 
-        console.log(config.get('location'));
-
-        var location = config.get('location');
+        var location = configService.getLocation();
 
         if (location == 'localhost') {
             $scope.location = "Your computer!";
@@ -19,14 +17,14 @@ angular.module('load.controller', [])
             console.log(data.toJSON());
             $timeout(function () {
                 window.location.href = './main.view.html';
-                config.set('set', true);
-                config.set('location', location);
+                configService.setSafe(true);
+                configService.configSetLocation(location);
             }, 4000);
 
         }, function (error) {
 
             $timeout(function () {
-                config.set('set', false);
+                configService.setSafe(false);
                 window.alert("Can't connect to " + location);
                 window.location.href = './login.view.html';
             }, 4000);

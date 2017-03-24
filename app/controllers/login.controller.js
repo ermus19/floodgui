@@ -2,7 +2,7 @@
 
 angular.module('login.controller', [])
 
-    .controller('login.controller', function ($scope, $timeout, Test) {
+    .controller('login.controller', function ($scope, $timeout, Test, configService) {
 
         $scope.showLoading = false;
         $scope.submitLoading = false;
@@ -20,8 +20,8 @@ angular.module('login.controller', [])
                 console.log(data.toJSON());
                 $timeout(function () {
                     window.location.href = './main.view.html';
-                    config.set('set', true);
-                    config.set('location', 'localhost');
+                    configService.setSafe(true);
+                    configService.setLocation('localhost');
                 }, 4000);
 
             }, function (error) {
@@ -57,8 +57,8 @@ angular.module('login.controller', [])
 
                 console.log(JSON.stringify(data.toJSON()));
                 window.location.href = './home.html';
-                config.set('set', true);
-                config.set('location', $scope.ip);
+                configService.setSafe(true);
+                configService.setLocation($scope.ip);
 
             }, function (response) {
 
