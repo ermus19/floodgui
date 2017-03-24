@@ -2,14 +2,13 @@
 
 angular.module('main.controller', [])
 
-    .controller('main.controller', function ($scope) {
+    .controller('main.controller', function ($scope, $interval, Test, configService) {
 
         $scope.showHome = true;
         $scope.showDevices = false;
         $scope.showPorts = false;
         $scope.showAbout = false;
 
-        console.log($scope.showAbout);
 
         $scope.changeView = function (view) {
 
@@ -50,5 +49,25 @@ angular.module('main.controller', [])
 
             }
         }
+
+        var conCheck= $interval(function () {
+
+            var location = configService.getLocation();
+
+            Test('http://' + location + ':8080/wm/core/memory/json').query().$promise.then(function (data) {
+
+                console.log(data.toJSON());
+
+            }, function (error) {
+
+                configService.setSafe(false);
+                window.alert("Connection lost with " + location);
+                window.location.href = './login.view.html';
+                $interval.cancel(conCheck);
+                conCheck = undefined;
+
+            });
+
+        }, 5000);
 
     });

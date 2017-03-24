@@ -9,6 +9,7 @@ describe('Login Controller:', function () {
     module('load.controller');
     module('login.controller');
     module('rest.service');
+    module('config.service');
   });
 
   beforeEach(inject(function (_$controller_, _$httpBackend_) {
@@ -20,7 +21,16 @@ describe('Login Controller:', function () {
     expect($controller).to.not.be.undefined;
   });
 
-  it('showLoading should change from true to false when calling onClickThis()', function () {
+  it('Should have variables correctly set', function () {
+    var $scope = {};
+    var controller = $controller('login.controller', { $scope: $scope });
+    expect($scope.showLoading).to.be.false;
+    expect($scope.submitLoading).to.be.false;
+    expect($scope.thisClicked).to.be.false;
+    expect($scope.showForm).to.be.false;
+  });
+
+  it('Should change boolean variables when calling onClickThis()', function () {
     var $scope = {};
     var controller = $controller('login.controller', { $scope: $scope });
     expect($scope.showLoading).to.be.false;
@@ -28,15 +38,7 @@ describe('Login Controller:', function () {
     expect($scope.showLoading).to.be.true;
   });
 
-  it('showForm should change from false to true when calling onClickOther()', function () {
-    var $scope = {};
-    var controller = $controller('login.controller', { $scope: $scope });
-    expect($scope.showForm).to.be.false;
-    $scope.onClickOther();
-    expect($scope.showForm).to.be.true;
-  });
-
-   it('showForm should change from false to true when calling onClickOther()', function () {
+  it('Should change boolean variables when calling onClickOther()', function () {
     var $scope = {};
     var controller = $controller('login.controller', { $scope: $scope });
     expect($scope.showForm).to.be.false;
