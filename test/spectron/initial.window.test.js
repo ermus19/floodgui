@@ -61,12 +61,4 @@ describe('Application default launch:', function () {
     .browserWindow.isFullScreen().should.eventually.be.true
   });
 
-  it('Should minimize and restore the window', function () {
-    return app.client.waitUntilWindowLoaded()
-    .browserWindow.minimize()
-    .browserWindow.isMinimized().should.eventually.be.true
-    .browserWindow.restore()
-    .browserWindow.isMinimized().should.eventually.be.false;
-  });
-
 });
