@@ -1,3 +1,4 @@
+'use strict';
 var helpers = require('./test.helpers');
 
 describe('Login window interactions', function () {
