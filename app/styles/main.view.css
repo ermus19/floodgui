@@ -3,3 +3,8 @@ body {
   font-family: 'Open Sans';
   color: black;
 }
+
+#graph {
+  width: 600px;
+  height: 400px;
+}

@@ -2,13 +2,12 @@
 
 angular.module('main.controller', [])
 
-    .controller('main.controller', function ($scope, $interval, Test, configService) {
+    .controller('main.controller', function ($scope, $interval, Test, configService, restService) {
 
         $scope.showHome = true;
         $scope.showDevices = false;
         $scope.showPorts = false;
         $scope.showAbout = false;
-
 
         $scope.changeView = function (view) {
 
@@ -52,11 +51,11 @@ angular.module('main.controller', [])
 
         var conCheck= $interval(function () {
 
-            var location = configService.getLocation();
-
-            Test('http://' + location + ':8080/wm/core/memory/json').query().$promise.then(function (data) {
+            restService.getMemory().query().$promise.then(function (data) {
 
                 console.log(data.toJSON());
+                $scope.freeMem = data.free;
+                $scope.usedMem = data.total;
 
             }, function (error) {
 
