@@ -1,28 +1,32 @@
 <!DOCTYPE html>
 <html ng-app="login.app">
-    <head>
-        <title>Floodlight controller GUI</title>
-         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="../../node_modules/angular/angular.min.js"></script>
-        <script src="../../node_modules/angular-resource/angular-resource.min.js"></script>
-        <link rel="stylesheet" href="../../node_modules/font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="../styles/app.css">
-        <link rel="stylesheet" href="../styles/login.view.css">
-    </head>
-    <body>
-        <div class ="main" ng-controller="load.controller">
-            <h1>Welcome back!</h1><br><br>
-            <p>Trying to connect to previous location...</p><br>
-            <p>Location: {{location}}</p>
-            <br>
-            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-                <span class="sr-only">Loading...</span>
+
+<head>
+    <title>Floodlight controller GUI</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../node_modules/angular/angular.min.js"></script>
+    <script src="../../node_modules/angular-resource/angular-resource.min.js"></script>
+    <script src="../../node_modules/ngstorage/ngStorage.js"></script>
+    <link rel="stylesheet" href="../../node_modules/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles/app.css">
+    <link rel="stylesheet" href="../styles/login.view.css">
+</head>
+
+<body>
+    <div class="main" ng-controller="load.controller">
+        <h1>Welcome back!</h1><br><br>
+        <p>Trying to connect to previous location...</p><br>
+        <p>Location: {{location}}</p>
+        <br>
+        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+        <span class="sr-only">Loading...</span>
         <script type="text/javascript" src="../login.app.js"></script>
         <script type="text/javascript" src="../services/rest.service.js"></script>
         <script type="text/javascript" src="../services/config.service.js"></script>
         <script type="text/javascript" src="../controllers/login.controller.js"></script>
         <script type="text/javascript" src="../controllers/load.controller.js"></script>
-    </body>
+</body>
+
 </html>

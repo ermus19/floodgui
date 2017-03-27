@@ -1,22 +1,22 @@
 'use strict';
 
-angular.module('config.service', [])
+angular.module('config.service', ['ngStorage'])
 
-    .factory('configService', function () {
+    .factory('configService', function ($localStorage) {
         return {
             setSafe: function (state) {
                 if (typeof (state) === "boolean") {
-                    config.set('safe', state);
+                    $localStorage.state = "true";
                 }
             },
             getSafe: function () {
-                return config.get('safe');
+                return $localStorage.state;
             },
             setLocation: function (location) {
-                config.set('location', location);
+                $localStorage.location = location;
             },
             getLocation: function () {
-                return config.get('location');
+                return $localStorage.location;
             }
         }
     });
