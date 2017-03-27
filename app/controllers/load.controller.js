@@ -19,7 +19,7 @@ angular.module('load.controller', [])
                 window.location.href = './main.view.html';
                 configService.setSafe(true);
                 configService.configSetLocation(location);
-            }, 4000);
+            }, 1000);
 
         }, function (error) {
 

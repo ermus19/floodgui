@@ -22,7 +22,7 @@ angular.module('login.controller', [])
                     window.location.href = './main.view.html';
                     configService.setSafe(true);
                     configService.setLocation('localhost');
-                }, 4000);
+                }, 1000);
 
             }, function (error) {
 
@@ -51,7 +51,7 @@ angular.module('login.controller', [])
         $scope.onClickSubmit = function () {
 
             $scope.submitLoading = true;
-            $timeout(4000);
+            $timeout(1800);
 
             Test('http://' + $scope.ip + ':8080/wm/core/memory/json').query().$promise.then(function (data) {
 
