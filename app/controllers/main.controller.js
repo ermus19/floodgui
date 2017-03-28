@@ -8,6 +8,7 @@ angular.module('main.controller', [])
         $scope.showDevices = false;
         $scope.showPorts = false;
         $scope.showAbout = false;
+        configService.setSafe(true);
 
         $scope.changeView = function (view) {
 

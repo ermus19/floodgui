@@ -2,35 +2,45 @@
 
 angular.module('login.controller', [])
 
-    .controller('login.controller', function ($scope, $timeout, Test, configService) {
+    .controller('login.controller', function ($scope, $location, $timeout, Test, configService) {
 
-        $scope.showLoading = false;
-        $scope.submitLoading = false;
+        if (configService.getSafe()) {
+
+            var location = configService.getLocation();
+            if (location == 'localhost') {
+
+                $scope.location = 'This Computer!';
+
+            } else {
+
+                $scope.location = 'IP: ' + location;
+
+            }
+
+            $scope.showPrev = true;
+            $scope.showForm = false;
+            $scope.showButtons = false;
+        }else{
+            $scope.showPrev = false;
+            $scope.showForm = false;
+            $scope.showButtons = true;
+        }
         $scope.thisClicked = false;
-        $scope.showForm = false;
+        $scope.submitLoading = false;
+        $scope.showLoading = false;
+        $scope.showLoadingPrev = false;
         $scope.ipPattern = new RegExp(/^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/);
 
         $scope.onClickThis = function () {
 
             $scope.showLoading = true;
             $scope.thisClicked = true;
-
-            Test('http://localhost:8080/wm/core/memory/json').query().$promise.then(function (data) {
-
-                console.log(data.toJSON());
-                $timeout(function () {
-                    window.location.href = './main.view.html';
-                    configService.setSafe(true);
-                    configService.setLocation('localhost');
-                }, 1000);
-
-            }, function (error) {
-
-                window.alert("Can't connect to localhost");
-                $scope.showLoading = false;
-                $scope.thisClicked = false;
-
-            });
+            $timeout(function () {
+                if (!checkConnection('localhost')) {
+                    $scope.showLoading = false;
+                    $scope.thisClicked = false;
+                }
+            }, 1800);
 
         };
 
@@ -41,33 +51,42 @@ angular.module('login.controller', [])
         }
 
         $scope.onClickBack = function () {
-
             $scope.showForm = false;
             $scope.ip = null;
             $scope.ipForm.$setPristine();
 
         }
 
+        $scope.onClickBackPrev = function () {
+
+            $scope.showButtons = true;
+            $scope.showPrev = false;
+            configService.setSafe(false);
+
+        }
+
+        $scope.onClickPrev = function () {
+
+            $scope.showLoadingPrev = true;
+
+            $timeout(function () {
+                if (!checkConnection(location)) {
+                    $scope.showButtons = true;
+                    $scope.showPrev = false;
+                }
+            }, 1800);
+        };
+
         $scope.onClickSubmit = function () {
 
             $scope.submitLoading = true;
-            $timeout(1800);
-
-            Test('http://' + $scope.ip + ':8080/wm/core/memory/json').query().$promise.then(function (data) {
-
-                console.log(JSON.stringify(data.toJSON()));
-                window.location.href = './home.html';
-                configService.setSafe(true);
-                configService.setLocation($scope.ip);
-
-            }, function (response) {
-
-                window.alert("Can't connect to: " + $scope.ip);
-                $scope.submitLoading = false;
-                $scope.ip = null;
-                $scope.ipForm.$setPristine();
-
-            });
+            $timeout(function () {
+                if (!checkConnection($scope.ip)) {
+                    $scope.submitLoading = false;
+                    $scope.ip = null;
+                    $scope.ipForm.$setPristine();
+                }
+            }, 1800);
         };
 
         $scope.filterValue = function ($event) {
@@ -80,6 +99,24 @@ angular.module('login.controller', [])
                 console.log("Input not valid");
 
             }
+        };
+
+        var checkConnection = function (location) {
+
+            Test('http://' + location + ':8080/wm/core/memory/json').query().$promise.then(function (data) {
+
+                configService.setSafe(true);
+                configService.setLocation(location);
+                $scope.showPrev = false;
+                $scope.showForm = false;
+                $scope.showButtons = true;
+                $location.url('/home');
+            }, function (response) {
+
+                window.alert("Can't connect to: " + location);
+                return false;
+
+            });
         };
 
     });

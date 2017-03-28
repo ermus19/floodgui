@@ -22,31 +22,17 @@ function createWindow() {
     width: config.get('width'),
     height: config.get('height'),
     minWidth: 1023,
-    minHeight: 700
+    minHeight: 700,
 
   });
 
-  if(config.has('safe') && config.get('safe')){
-    
-    win.loadURL(url.format({
+  win.loadURL(url.format({
 
-    pathname: path.join(__dirname, './app/views/load.view.html'),
+    pathname: path.join(__dirname, './app/index.html'),
     protocol: 'file:',
     slashes: true
 
   }));
-
-  }else{
-  
-    win.loadURL(url.format({
-
-    pathname: path.join(__dirname, './app/views/login.view.html'),
-    protocol: 'file:',
-    slashes: true
-
-  }));
-
-  }
 
   //win.webContents.openDevTools();
 

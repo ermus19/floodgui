@@ -6,7 +6,7 @@ angular.module('config.service', ['ngStorage'])
         return {
             setSafe: function (state) {
                 if (typeof (state) === "boolean") {
-                    $localStorage.state = "true";
+                    $localStorage.state = state;
                 }
             },
             getSafe: function () {

@@ -1,17 +1,28 @@
+@font-face {
+  font-family: 'Open Sans';
+  font-weight: 400;
+  font-style: normal;
+  src: url('../assets/fonts/Open-Sans-regular.woff2') format('woff2');
+}
+
 body {
   background-color: #999999;
   font-family: 'Open Sans';
   color: white;
 }
 
-.main{
+#welcome, .form {
   margin-top: 150px;
   text-align: center;
   font-size: 18px;
 }
 
-.main h1{
+#welcome h1{
   font-size: 60px;
+}
+
+.previous {
+  display: inline;
 }
 
 input{
@@ -35,7 +46,7 @@ input.ng-valid{
   background-color: #80ff80;
 }
 
-.main button{
+.btn {
   font-size: 18px;
   margin: 5px;
 }
@@ -49,4 +60,15 @@ p.note{
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+}
+
+div.vis-network {
+  background-color: white;
+  float: right;
+  margin-top: 10px;
+  margin-bottom: 100px;
+  margin-right: 10px;
+  margin-left: 10px;
+  width: 900px;
+  height: 700px;
 }
