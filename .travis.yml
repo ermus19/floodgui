@@ -18,6 +18,7 @@ before_script:
 install:
   - npm install
 script:
+  - npm run json-server
   - npm run travis-build
   - npm test
   - npm run karma

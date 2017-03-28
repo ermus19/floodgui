@@ -7,6 +7,7 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha ./test/spectron",
     "karma": "./node_modules/.bin/karma start ./karma.conf.js",
+    "json-server": "./node_modules/.bin/json-server --port 8080 test/db.json --routes test/routes.json --watch &",
     "start": "./node_modules/.bin/electron .",
     "build": "./scripts/build.sh",
     "travis-build": "./scripts/travis-build.sh"
@@ -32,6 +33,7 @@
     "chai-as-promised": "^6.0.0",
     "electron": "^1.6.2",
     "electron-packager": "^8.6.0",
+    "json-server": "^0.9.6",
     "karma": "^1.5.0",
     "karma-chai": "^0.1.0",
     "karma-cli": "^1.0.1",
@@ -47,10 +49,13 @@
   "dependencies": {
     "angular": "^1.6.3",
     "angular-resource": "^1.6.3",
+    "angular-route": "^1.6.3",
+    "angular-visjs": "^4.16.0",
     "bootstrap": "^3.3.7",
     "electron-config": "^0.2.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.2.0",
+    "ngstorage": "^0.3.11",
     "vis": "^4.18.1"
   }
 }

@@ -47,7 +47,7 @@ describe('Application default launch:', function () {
 
   it('Should load login view', function () {
     return app.client.waitUntilWindowLoaded()
-      .getUrl().should.eventually.match(/login.view.html/);
+      .getUrl().should.eventually.match(/login/);
   });
 
   it('Should have login form invisible', function () {

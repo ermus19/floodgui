@@ -6,7 +6,6 @@ describe('Login Controller:', function () {
   var $httpBackend;
 
   beforeEach(function () {
-    module('load.controller');
     module('login.controller');
     module('rest.service');
     module('config.service');

@@ -18,6 +18,10 @@ module.exports = function(config) {
       './node_modules/angular/angular.js',
       './node_modules/angular-mocks/angular-mocks.js',
       './node_modules/angular-resource/angular-resource.js',
+      './node_modules/angular-route/angular-route.js',
+      './node_modules/angular-visjs/angular-vis.js',
+      './node_modules/ngstorage/ngStorage.js',
+      './app/*.js',
       './app/services/*.js',
       './app/controllers/*.js',
       './test/karma/*.js'
