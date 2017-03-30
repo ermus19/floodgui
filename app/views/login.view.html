@@ -1,8 +1,8 @@
-<div id="welcome" ng-hide="showForm">
-  <h1>Welcome to FloodGUI!</h1><br><br>
-  <div id="buttons" ng-show="showButtons">
-    <p>Choose where the Floodlight SDN Controller is running:</p><br>
-    <button id="thisButton" type="button" ng-click="onClickThis()" ng-disabled="thisClicked" class="btn btn-default btn-lg">
+<h1>Welcome to FloodGUI!</h1>
+<br><br>
+<div id="buttons">
+  <p>Choose where the Floodlight SDN Controller is running:</p><br>
+  <button id="thisButton" type="button" ng-click="onClickThis()" ng-disabled="thisClicked" class="btn btn-default btn-lg">
           <span ng-hide="showLoading">
             This computer 
           </span>
@@ -11,52 +11,10 @@
             <i class="fa fa-spinner fa-spin"></i>
           </span> 
         </button>
-    <button id="otherButton" type="button" ng-click="onClickOther()" ng-disabled="thisClicked" class="btn btn-default btn-lg">
+  <button id="otherButton" type="button" ng-click="onClickOther()" ng-disabled="thisClicked" class="btn btn-default btn-lg">
           Other computer
         </button>
-    <br><br>
-    <p class="note">Choosing "This computer" tries to connect to localhost, "Other computer" lets you choose the IP address where the controller
-      is running</p>
-  </div>
-  <div class="previous" ng-show="showPrev">
-    <p>Connect to previous location:</p>
-    <button id="prevButton" ng-click="onClickPrev()" type="button" class="btn btn-default">
-          <span ng-hide="showLoadingPrev" ng-bind="location">
-          </span>
-          <span ng-show="showLoadingPrev">
-            Loading...
-            <i class="fa fa-spinner fa-spin"></i>
-          </span> 
-        </button>
-    <button id="backButtonPrev" ng-click="onClickBackPrev()" type="button" class="btn btn-primary">
-          Back to login
-        </button>
-  </div>
-</div>
-<div class="form" ng-show="showForm">
   <br><br>
-  <p>Insert the IP address of the machine where the Floodlight Controller is running:
-    <br><br>
-    <form class="form-inline" id="ipForm" name="ipForm" ng-model="ipForm" novalidate>
-      <div class="form-group has-feedback" ng-class="{ 'has-error': ipForm.ip.$invalid && !ipForm.ip.$pristine && !ipForm.ip.$dirty, 'has-success': ipForm.ip.$valid }">
-        <label for="ipAddress">IP address:</label>
-        <input class="form-control" name="ip" ng-model="ip" ng-model-options="{ debounce: 0 }" placeholder="0.0.0.0" ng-pattern="ipPattern"
-          ng-keypress="filterValue($event)" required></input>
-      </div>
-      <button id="submitButton" type="button" ng-click="onClickSubmit()" ng-disabled="ipForm.ip.$invalid || submitLoading" class="btn btn-default">
-              <span ng-hide="submitLoading">
-                Submit
-              </span>
-              <span ng-show="submitLoading">
-                Loading...
-                <i class="fa fa-spinner fa-spin"></i>
-              </span>
-            </button>
-      <label class="example">For example "192.168.1.2"</label>
-    </form>
-    <br>
-    <button id="backButton" ng-click="onClickBack()" ng-disabled="submitLoading" type="button" class="btn btn-primary">
-          Back
-        </button>
-</div>
+  <p class="note">Choosing "This computer" tries to connect to localhost, "Other computer" lets you choose the IP address where the controller
+    is running</p>
 </div>

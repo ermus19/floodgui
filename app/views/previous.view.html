@@ -1,0 +1,17 @@
+<div class="previous">
+  <p>Connect to previous location:</p>
+  <br><br>
+  <div id="buttons">
+    <button id="prevButton" ng-click="onClickPrev()" type="button" class="btn btn-default">
+          <span ng-hide="showLoadingPrev" ng-bind="location">
+          </span>
+          <span ng-show="showLoadingPrev">
+            Loading...
+            <i class="fa fa-spinner fa-spin"></i>
+          </span> 
+    </button>
+    <button id="backButtonPrev" ng-click="onClickBackPrev()" type="button" class="btn btn-primary">
+          Back to login
+  </button>
+  </div>
+</div>

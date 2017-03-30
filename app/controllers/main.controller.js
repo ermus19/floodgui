@@ -2,13 +2,15 @@
 
 angular.module('main.controller', [])
 
-    .controller('main.controller', function ($scope, $interval, Test, configService, restService) {
+    .controller('main.controller', function ($scope, $location, $interval, Test, configService, restService) {
 
         $scope.showHome = true;
         $scope.showDevices = false;
         $scope.showPorts = false;
         $scope.showAbout = false;
         configService.setSafe(true);
+
+        var location = configService.getLocation();
 
         $scope.changeView = function (view) {
 
@@ -62,7 +64,7 @@ angular.module('main.controller', [])
 
                 configService.setSafe(false);
                 window.alert("Connection lost with " + location);
-                window.location.href = './login.view.html';
+                $location.url('/login');
                 $interval.cancel(conCheck);
                 conCheck = undefined;
 
