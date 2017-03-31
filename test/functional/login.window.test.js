@@ -20,7 +20,7 @@ describe('Login window interactions', function () {
   it('Show IP form when clicking "Other Computer" button', function () {
     return app.client.waitUntilWindowLoaded()
       .click('#otherButton')
-      .isVisible('.form').should.eventually.be.true;
+      .getUrl().should.eventually.match(/form/);
   });
 
   it('Should have back button enabled', function () {
@@ -29,12 +29,12 @@ describe('Login window interactions', function () {
     .isEnabled('#backButton').should.eventually.be.true;
   })
 
-  it('Should set the IP form invisible when clicking "Back" button', function () {
+  it('Should load login view from form view when clicking "Back" button', function () {
     return app.client.waitUntilWindowLoaded()
       .click('#otherButton')
-      .isVisible('.form').should.eventually.be.true
+      .getUrl().should.eventually.match(/form/)
       .click('#backButton')
-      .isVisible('.form').should.eventually.be.false;
+      .getUrl().should.eventually.match(/login/);
   });
 
   it('Should have IP form submit button disabled', function () {

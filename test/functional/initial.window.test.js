@@ -50,11 +50,6 @@ describe('Application default launch:', function () {
       .getUrl().should.eventually.match(/login/);
   });
 
-  it('Should have login form invisible', function () {
-    return app.client.waitUntilWindowLoaded()
-      .isVisible('.form').should.eventually.be.false;
-  });
-
   it('Should set fullscreen mode', function () {
     return app.client.waitUntilWindowLoaded()
     .browserWindow.setFullScreen(true)
