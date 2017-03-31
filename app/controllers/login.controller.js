@@ -83,7 +83,7 @@ angular.module('login.controller', [])
             }, function (response) {
 
                 configService.setSafe(false);
-                $window.alert("Can't connect to: " + location);
+                $window.alert("Can't connect to " + location);
                 return false;
 
             });

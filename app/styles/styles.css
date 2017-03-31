@@ -29,12 +29,17 @@ body {
 }
 
 .previous p {
-  margin-top: 200px;
   text-align: center;
   font-size: 30px;
 }
 
 h1 {
+  margin-top: 150px;
+  text-align: center;
+  font-size: 60px;
+}
+
+.previous h1 {
   margin-top: 150px;
   text-align: center;
   font-size: 60px;
@@ -65,6 +70,24 @@ input.ng-valid{
   background-color: #80ff80;
 }
 
+#home .list-group{
+  width: 35%;
+  float: left;
+  margin-top: 24px;
+  margin-right: 5px;
+  margin-left: 10px;
+}
+
+.list-group-item {
+  color: black;
+  text-align: center;
+}
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+  color: white;
+  background-color: black;
+  border-color: black;
+}
+
 .btn {
   font-size: 18px;
   margin: 5px;
@@ -81,13 +104,19 @@ p.note{
   width: 50%;
 }
 
+#restore {
+  font-size: 12px;
+  position: fixed;
+  top: 90px;
+  right: 18px;
+}
+
 div.vis-network {
-  background-color: white;
   float: right;
-  margin-top: 10px;
-  margin-bottom: 100px;
-  margin-right: 10px;
+  border:2px solid black;
+  border-radius: 10px;
+  background-color: lightgray;
+  margin-top: 20px;
+  margin-right: 20px;
   margin-left: 10px;
-  width: 900px;
-  height: 700px;
 }

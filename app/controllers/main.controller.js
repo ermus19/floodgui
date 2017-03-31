@@ -8,6 +8,7 @@ angular.module('main.controller', [])
         $scope.showDevices = false;
         $scope.showPorts = false;
         $scope.showAbout = false;
+        $scope.showGraph = false;
         configService.setSafe(true);
 
         var location = configService.getLocation();

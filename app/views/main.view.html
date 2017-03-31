@@ -4,20 +4,31 @@
             <a class="navbar-brand mb-0" href="">FloodGUI</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="" ng-click="changeView('home')">Home</a></li>
-            <li><a href="" ng-click="changeView('devices')">Devices</a></li>
-            <li><a href="" ng-click="changeView('ports')">Ports</a></li>
-            <li><a href="" ng-click="changeView('about')">About</a></li>
+            <li ng-class="{ active: showHome}"><a href="" ng-click="changeView('home')">Home</a></li>
+            <li ng-class="{ active: showDevices}"><a href="" ng-click="changeView('devices')">Devices</a></li>
+            <li ng-class="{ active: showPorts}"><a href="" ng-click="changeView('ports')">Ports</a></li>
+            <li ng-class="{ active: showAbout}"><a href="" ng-click="changeView('about')">About</a></li>
         </ul>
     </div>
 </nav>
 
-<div id="home" class=".center">
-    <p>Home view</p>
-    <div id "graph" ng-controller="graph.controller">
-        <vis-network data="data" options="options"></vis-network>
+<div id="home" ng-show="showHome">
+    <div ng-controller="graph.controller">
+        <vis-network data="graphData" options="graphOptions" events="graphEvents"></vis-network>
+        <button id="restore" type="button" ng-click="graphFit()" class="btn btn-info" ng-disabled="btnDisabled">
+            <span ng-hide="showLoading">
+                Restore Graph!
+            </span>
+            <span ng-show="showLoading">
+                Loading...
+            <i class="fa fa-spinner fa-spin"></i>
+    </button>
     </div>
-    <p id="memory">Memory: {{freeMem}} / {{usedMem}}</p>
+    <ul class="list-group">
+        <li class="list-group-item active">Floodlight Controller info:</li>
+        <li class="list-group-item">Memory: {{usedMem / freeMem}}</li>
+        <li class="list-group-item">Third item</li>
+    </ul>
 </div>
 <div id="devices" ng-show="showDevices">
     <p>Devices view</p>
