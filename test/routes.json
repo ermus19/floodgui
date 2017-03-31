@@ -1,3 +1,7 @@
 {
-    "/wm/core/memory/json": "/memory"
+    "/wm/core/memory/json": "/memory",
+    "/wm/core/health/json": "/health",
+    "/wm/core/version/json": "/version",
+    "/wm/core/system/uptime/json": "/uptime",
+    "/wm/firewall/module/status/json": "/firewall"
 }
