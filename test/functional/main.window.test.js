@@ -22,10 +22,9 @@ describe('Main window interactions', function () {
         return helpers.stopApp(app);
     });
 
-    it('Should show main window', function () {
+    it('Should show previous window', function () {
         return app.client.waitUntilWindowLoaded()
             .getUrl().should.eventually.match(/home/);
 
     });
-
 });

@@ -22,14 +22,13 @@ describe('Previous window interactions', function () {
         return helpers.stopApp(app);
     });
 
-    it('Should show previous window', function () {
+    it('Should show home window', function () {
         return app.client.waitUntilWindowLoaded()
-            .getUrl().should.eventually.match(/previous/);
+            .getUrl().should.eventually.match(/home/);
     });
 
-    it('Should show previous connection', function () {
+    it('Should show previous connection window', function () {
         return app.client.waitUntilWindowLoaded()
         .getUrl().should.eventually.match(/previous/)
-        .isVisible('.previous').should.eventually.be.true;
     })
 });
