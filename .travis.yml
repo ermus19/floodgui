@@ -2,8 +2,8 @@ language: node_js
 node_js:
     - "7"
 os:
-  - osx
   - linux
+  - osx
 branches:
   except:
   - master
