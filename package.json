@@ -5,7 +5,7 @@
   "description": "Floodlight GUI using electron framework",
   "main": "main.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha ./test/functional/initial.window.test.js ./test/functional/login.window.test.js ./test/functional/previous.window.test.js ./test/functional/main.window.test.js",
+    "test": "./node_modules/.bin/mocha ./test/functional/*",
     "karma": "./node_modules/.bin/karma start ./karma.conf.js",
     "json-server": "./node_modules/.bin/json-server --port 8080 test/db.json --routes test/routes.json --watch &",
     "start": "./node_modules/.bin/electron .",
