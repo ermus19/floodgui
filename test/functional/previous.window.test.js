@@ -7,28 +7,25 @@ describe('Previous window interactions', function () {
 
     var app = null;
 
-    beforeEach(function (done) {
-        helpers.startApp().then(function (startedApp) {
+    beforeEach(function () {
+        return helpers.startApp().then(function (startedApp) {
             app = startedApp;
-            app.client.waitUntilWindowLoaded()
-                .click('#thisButton');
         });
-        setTimeout(function () {
-            done();
-        }, 5000)
     });
 
     afterEach(function () {
         return helpers.stopApp(app);
     });
 
-    it('Should show home window', function () {
-        return app.client.waitUntilWindowLoaded()
-            .getUrl().should.eventually.match(/home/);
-    });
-
     it('Should show previous connection window', function () {
         return app.client.waitUntilWindowLoaded()
-        .getUrl().should.eventually.match(/previous/)
-    })
+            .getUrl().should.eventually.match(/previous/)
+    });
+
+    it('Should show login when clicking "back" button', function () {
+        return app.client.waitUntilWindowLoaded()
+            .click('#backButtonPrev')
+            .getUrl().should.eventually.match(/login/);
+    });
+
 });

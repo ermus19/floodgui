@@ -7,22 +7,24 @@ describe('Main window interactions', function () {
 
     var app = null;
 
-    beforeEach(function (done) {
+    before(function (done) {
         helpers.startApp().then(function (startedApp) {
             app = startedApp;
             app.client.waitUntilWindowLoaded()
                 .click('#thisButton');
+            setTimeout(function () {
+                app.client
+                    .getUrl().should.eventually.match(/home/);
+                done();
+            }, 3000);
         });
-        setTimeout(function () {
-            done();
-        }, 5000)
     });
 
-    afterEach(function () {
+    after(function () {
         return helpers.stopApp(app);
     });
 
-    it('Should show previous window', function () {
+    it('Should show main window', function () {
         return app.client.waitUntilWindowLoaded()
             .getUrl().should.eventually.match(/home/);
 
