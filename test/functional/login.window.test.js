@@ -10,6 +10,9 @@ describe('Login window interactions', function () {
   beforeEach(function () {
     return helpers.startApp().then(function (startedApp) {
       app = startedApp;
+      app.browserWindow.isVisible().then(function (visible) {
+        console.log('window is visible? ' + visible)
+      })
     });
   });
 
@@ -25,8 +28,8 @@ describe('Login window interactions', function () {
 
   it('Should have back button enabled', function () {
     return app.client.waitUntilWindowLoaded()
-    .click('#otherButton')
-    .isEnabled('#backButton').should.eventually.be.true;
+      .click('#otherButton')
+      .isEnabled('#backButton').should.eventually.be.true;
   })
 
   it('Should load login view from form view when clicking "Back" button', function () {
@@ -39,46 +42,46 @@ describe('Login window interactions', function () {
 
   it('Should have IP form submit button disabled', function () {
     return app.client.waitUntilWindowLoaded()
-    .click('#otherButton')
-    .isEnabled('#submitButton').should.eventually.be.false;
+      .click('#otherButton')
+      .isEnabled('#submitButton').should.eventually.be.false;
   });
 
   it('Should prevent characters on IP form', function () {
     return app.client.waitUntilWindowLoaded()
-    .click('#otherButton')
-    .setValue('.form-control', 'abcdefghijklmnñopqrstuvwxyz`+´ç')
-    .getValue('.form-control').should.eventually.equal('');
+      .click('#otherButton')
+      .setValue('.form-control', 'abcdefghijklmnñopqrstuvwxyz`+´ç')
+      .getValue('.form-control').should.eventually.equal('');
   });
 
   it('Should allow numbers and points on IP form', function () {
     return app.client.waitUntilWindowLoaded()
-    .click('#otherButton')
-    .setValue('.form-control', '192.158..12335.23532')
-    .getValue('.form-control').should.eventually.equal('192.158..12335.23532');
+      .click('#otherButton')
+      .setValue('.form-control', '192.158..12335.23532')
+      .getValue('.form-control').should.eventually.equal('192.158..12335.23532');
   });
 
   it('Should allow IP form submit on valid IP: [1.1.1.1, 192.168.1.1, 0.0.0.0]', function () {
     return app.client.waitUntilWindowLoaded()
-    .click('#otherButton')
-    .setValue('.form-control', '1.1.1.1')
-    .isEnabled("#submitButton").should.eventually.be.true
-    .setValue('.form-control', '0.0.0.0')
-    .isEnabled("#submitButton").should.eventually.be.true
-    .setValue('.form-control', '192.168.1.1')
-    .isEnabled("#submitButton").should.eventually.be.true;
+      .click('#otherButton')
+      .setValue('.form-control', '1.1.1.1')
+      .isEnabled("#submitButton").should.eventually.be.true
+      .setValue('.form-control', '0.0.0.0')
+      .isEnabled("#submitButton").should.eventually.be.true
+      .setValue('.form-control', '192.168.1.1')
+      .isEnabled("#submitButton").should.eventually.be.true;
   });
 
   it('Should prevent IP form submit on invalid IP: [192.168..1.1, 192.1.1.1.1, 1922.168.1.1, 192.168.1.2.]', function () {
     return app.client.waitUntilWindowLoaded()
-    .click('#otherButton')
-    .setValue('.form-control', '192.168..1.1')
-    .isEnabled("#submitButton").should.eventually.be.false
-    .setValue('.form-control', '192.1.1.1.1')
-    .isEnabled("#submitButton").should.eventually.be.false
-    .setValue('.form-control', '1922.168.1.1')
-    .isEnabled("#submitButton").should.eventually.be.false
-    .setValue('.form-control', '192.168.1.2.')
-    .isEnabled("#submitButton").should.eventually.be.false;
+      .click('#otherButton')
+      .setValue('.form-control', '192.168..1.1')
+      .isEnabled("#submitButton").should.eventually.be.false
+      .setValue('.form-control', '192.1.1.1.1')
+      .isEnabled("#submitButton").should.eventually.be.false
+      .setValue('.form-control', '1922.168.1.1')
+      .isEnabled("#submitButton").should.eventually.be.false
+      .setValue('.form-control', '192.168.1.2.')
+      .isEnabled("#submitButton").should.eventually.be.false;
   })
 
 });
