@@ -39,7 +39,7 @@ describe('Login window interactions', function () {
 
   it('Should have IP form submit button disabled', function () {
     return app.client.waitUntilWindowLoaded()
-      .click('#otherButton')
+      .click('#otherButton').waitUntilWindowLoaded()
       .isEnabled('#submitButton').should.eventually.be.false;
   });
 
