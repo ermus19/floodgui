@@ -24,7 +24,7 @@ describe('Previous window interactions', function () {
 
     it('Should show login when clicking "back" button', function () {
         return app.client.waitUntilWindowLoaded()
-            .click('#backButtonPrev')
+            .click('#backButtonPrev').waitUntilWindowLoaded()
             .getUrl().should.eventually.match(/login/);
     });
 
