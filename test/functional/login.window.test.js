@@ -10,9 +10,6 @@ describe('Login window interactions', function () {
   beforeEach(function () {
     return helpers.startApp().then(function (startedApp) {
       app = startedApp;
-      app.browserWindow.isVisible().then(function (visible) {
-        console.log('window is visible? ' + visible)
-      })
     });
   });
 

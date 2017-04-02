@@ -23,7 +23,7 @@ function createWindow() {
     height: config.get('height'),
     minWidth: 1023,
     minHeight: 700,
-
+    show: false
   });
 
   win.loadURL(url.format({
@@ -33,6 +33,10 @@ function createWindow() {
     slashes: true
 
   }));
+
+  win.once('ready-to-show', () => {
+    win.show()
+  })
 
   //win.webContents.openDevTools();
 
