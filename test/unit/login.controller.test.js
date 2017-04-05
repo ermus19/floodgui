@@ -5,6 +5,10 @@ describe('Login Controller:', function () {
   var $controller;
   var $httpBackend;
   var $location;
+  var $timeout;
+  var $window;
+  var $rootScope;
+  var configService;
 
   beforeEach(function () {
     module('login.controller');
@@ -12,17 +16,25 @@ describe('Login Controller:', function () {
     module('config.service');
   });
 
-  beforeEach(inject(function (_$controller_, _$httpBackend_, _$location_) {
+  beforeEach(inject(function (_$controller_, _$httpBackend_, _$location_, _$timeout_, _$window_, _configService_) {
     $controller = _$controller_;
     $httpBackend = _$httpBackend_;
     $location = _$location_;
+    $timeout = _$timeout_;
+    $window = _$window_;
+    configService = _configService_;
   }));
+
+  afterEach(function () {
+    $httpBackend.verifyNoOutstandingExpectation();
+    $httpBackend.verifyNoOutstandingRequest();
+  });
 
   it('Expects controller to be defined', function () {
     expect($controller).to.not.be.undefined;
   });
 
-  it('Should have variables correctly set', function () {
+  it('Should have variables correctly set on controller default', function () {
     var $scope = {};
     var controller = $controller('login.controller', { $scope: $scope });
     expect($scope.showLoading).to.be.false;
@@ -30,12 +42,87 @@ describe('Login Controller:', function () {
     expect($scope.thisClicked).to.be.false;
   });
 
-  it('Should show loading when calling onClickThis()', function () {
+  it('Expects as config.getSafe() returns false', function () {
+    var $scope = {};
+    var configStub = sinon.stub(configService, "getSafe").returns(false);
+    var controller = $controller('login.controller', { $scope: $scope });
+    expect(configStub.calledOnce).to.be.true;
+    expect($location.path()).to.be.equal('/login');
+    expect($scope.location).to.be.undefined;
+  });
+
+  it('Expects as config.getSafe() returns true', function () {
+    var $scope = {};
+    var configStub = sinon.stub(configService, "getSafe").returns(true);
+    var controller = $controller('login.controller', { $scope: $scope });
+    expect(configStub.calledOnce).to.be.true;
+    expect($location.path()).to.be.equal('/previous');
+  });
+
+  it('Should set $scope.location to "This computer!"', function () {
+    var $scope = {};
+    var configStub = sinon.stub(configService, "getSafe").returns(true);
+    var configStubLocation = sinon.stub(configService, "getLocation").returns('localhost');
+    var controller = $controller('login.controller', { $scope: $scope });
+    expect(configStub.calledOnce).to.be.true;
+    expect($scope.location).to.be.equal('This Computer!');
+  });
+
+  it('Should set $scope.location to "IP: 192.168.1.1"', function () {
+    var $scope = {};
+    var configStub = sinon.stub(configService, "getSafe").returns(true);
+    var configStubLocation = sinon.stub(configService, "getLocation").returns('192.168.1.1');
+    var controller = $controller('login.controller', { $scope: $scope });
+    expect(configStub.calledOnce).to.be.true;
+    expect($scope.location).to.be.equal('IP: 192.168.1.1');
+  });
+
+  it('Should set variables correctly when calling onClickThis()', function () {
     var $scope = {};
     var controller = $controller('login.controller', { $scope: $scope });
-    expect($scope.showLoading).to.be.false;
     $scope.onClickThis();
     expect($scope.showLoading).to.be.true;
+    expect($scope.thisClicked).to.be.true;
   });
+
+  it('Should set variables correctly when calling onClickThis() after timeout', function () {
+    var $scope = {};
+    var controller = $controller('login.controller', { $scope: $scope });
+    var windowAlertSpy = sinon.spy($window, 'alert');
+    $scope.onClickThis();
+    $timeout.flush();
+    assert(windowAlertSpy.calledOnce);
+    assert(windowAlertSpy.calledWith("Can't connect to localhost"));
+    expect($scope.showLoading).to.be.false;
+    expect($scope.thisClicked).to.be.false;
+  });
+
+  it('Should show form view when calling onClickOther()', function () {
+    var $scope = {};
+    var controller = $controller('login.controller', { $scope: $scope });
+    var locationSpy = sinon.spy($location, 'path');
+    $scope.onClickOther();
+    assert(locationSpy.calledOnce);
+    assert(locationSpy.calledWith('/form'));
+  });
+
+  it('Should change location and safeness when calling onClickBackPrev()', function () {
+    var $scope = {};
+    var controller = $controller('login.controller', { $scope: $scope });
+    var configSpy = sinon.spy(configService, "setSafe");
+    var locationSpy = sinon.spy($location, 'path');
+    $scope.onClickBackPrev();
+    assert(locationSpy.calledWith('/login'));
+    assert(configSpy.calledOnce);
+    assert(configSpy.calledWith(false));
+  });
+
+  it('Should change location and safeness when calling onClickPrev()', function () {
+    var $scope = {};
+    var controller = $controller('login.controller', { $scope: $scope });
+    var locationSpy = sinon.spy($location, 'path');
+    $scope.onClickPrev();
+    expect($scope.showLoadingPrev).to.be.true;
+  });
+
 });
- 
