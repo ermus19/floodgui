@@ -19,6 +19,9 @@ angular.module('login.controller', [])
 
             }
 
+        } else {
+
+            $location.url('/login');
         }
 
         $scope.thisClicked = false;
