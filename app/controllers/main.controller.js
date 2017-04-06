@@ -2,7 +2,7 @@
 
 angular.module('main.controller', [])
 
-    .controller('main.controller', function ($scope, $location, $interval, Test, configService, restService) {
+    .controller('main.controller', function ($scope, $window, $location, $interval, Test, configService) {
 
         $scope.showHome = true;
         $scope.showDevices = false;
@@ -55,22 +55,19 @@ angular.module('main.controller', [])
 
         var conCheck= $interval(function () {
 
-            restService.getMemory().query().$promise.then(function (data) {
+            Test('http://' + location + ':8080/wm/core/memory/json').query().$promise.then(function (data) {
 
-                console.log(data.toJSON());
-                $scope.freeMem = data.free;
-                $scope.usedMem = data.total;
+                console.log(data.toJSON()); 
 
-            }, function (error) {
+            }, function (response) {
 
                 configService.setSafe(false);
-                window.alert("Connection lost with " + location);
+                $window.alert("Connection lost with " + location);
                 $location.url('/login');
                 $interval.cancel(conCheck);
                 conCheck = undefined;
 
             });
-
         }, 5000);
 
     });
