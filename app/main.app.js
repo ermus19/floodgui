@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('main.app', ['ngRoute', 'login.controller', 'form.controller', 'main.controller', 'graph.controller', 'rest.service', 'config.service'])
+angular.module('main.app', ['ngRoute', 'login.controller', 'form.controller', 'main.controller', 'stats.controller', 'graph.controller', 'rest.service', 'config.service'])
 
 
     .config(function ($routeProvider) {
