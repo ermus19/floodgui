@@ -1,7 +1,7 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand mb-0" href="">FloodGUI</a>
+            <a class="navbar-brand mb-0">FloodGUI</a>
         </div>
         <ul class="nav navbar-nav">
             <li ng-class="{ active: showHome}"><a href="" ng-click="changeView('home')">Home</a></li>
@@ -24,11 +24,61 @@
             <i class="fa fa-spinner fa-spin"></i>
     </button>
     </div>
-    <ul class="list-group">
-        <li class="list-group-item active">Floodlight Controller info:</li>
-        <li class="list-group-item">Memory: {{usedMem / freeMem}}</li>
-        <li class="list-group-item">Third item</li>
-    </ul>
+    <div ng-controller="stats.controller">
+        <ul class="list-group">
+            <li class="list-group-item active">
+                Floodlight Controller info:
+            </li>
+             <li class="list-group-item">
+                <span ng-show="showUptime">
+                    Uptime: {{uptime}} 
+                </span>
+                <span ng-hide="showUptime">
+                    Uptime:
+                <i class="fa fa-gear fa-spin"></i>
+                </span>
+            </li>
+            <li class="list-group-item">
+                <span ng-show="showVersion">
+                    Controller version: {{version}}
+                </span>
+                <span ng-hide="showVersion">
+                    Controller version:
+                <i class="fa fa-gear fa-spin"></i>
+                </span>
+            </li>
+            <li class="list-group-item">
+                <span ng-show="showFirewallStatus">
+                    Firewall status: {{firewallStatus}}
+                </span>
+                <span ng-hide="showFirewallStatus">
+                    Firewall status:
+                <i class="fa fa-gear fa-spin"></i>
+                </span>
+            </li>
+        </ul>
+        <ul class="list-group">
+            <li class="list-group-item active">Floodlight Controller status:</li>
+            <li ng-class="memoryState">
+                <span ng-show="showMemory">
+                    Memory: {{memory}}
+                </span>
+                <span ng-hide="showMemory">
+                    Memory:
+                <i class="fa fa-gear fa-spin"></i>
+                </span>
+            </li>
+            <li ng-class="apiHealthState">
+                <span ng-show="showApiHealth">
+                    API Health: {{apiHealth}}
+                </span>
+                <span ng-hide="showApiHealth">
+                    API Health:
+                <i class="fa fa-gear fa-spin"></i>
+                </span>
+            </li>
+        </ul>
+    </div>
 </div>
 <div id="devices" ng-show="showDevices">
     <p>Devices view</p>
