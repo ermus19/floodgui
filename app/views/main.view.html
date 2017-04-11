@@ -78,10 +78,33 @@
                 </span>
             </li>
         </ul>
+        <ul class="list-group">
+            <li class="list-group-item active">Switch stats:</li>
+            <li class="list-group-item">
+                <span ng-show="showOFversion">
+                    OpenFlow version: {{OFVersion}}
+                </span>
+                <span ng-hide="showOFversion">
+                    OpenFlow version:
+                <i class="fa fa-gear fa-spin"></i>
+                </span>
+            </li>
+            <li class="list-group-item">
+                <span ng-show="showHostsCount">
+                    Connected hosts: {{hosts}}
+                </span>
+                <span ng-hide="showHostsCount">
+                    Connected hosts:
+                <i class="fa fa-gear fa-spin"></i>
+                </span>
+            </li>
+        </ul>
     </div>
 </div>
 <div id="devices" ng-show="showDevices">
-    <p>Devices view</p>
+    <div ng-controller="devices.controller">
+        <p>Devices view</p>
+    <div>
 </div>
 <div id="ports" ng-show="showPorts">
     <p>Ports view</p>
