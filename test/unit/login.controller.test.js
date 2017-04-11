@@ -8,21 +8,21 @@ describe('Login Controller:', function () {
   var $timeout;
   var $window;
   var $rootScope;
-  var configService;
+  var storageService;
 
   beforeEach(function () {
     module('login.controller');
     module('rest.service');
-    module('config.service');
+    module('storage.service');
   });
 
-  beforeEach(inject(function (_$controller_, _$httpBackend_, _$location_, _$timeout_, _$window_, _configService_) {
+  beforeEach(inject(function (_$controller_, _$httpBackend_, _$location_, _$timeout_, _$window_, _storageService_) {
     $controller = _$controller_;
     $httpBackend = _$httpBackend_;
     $location = _$location_;
     $timeout = _$timeout_;
     $window = _$window_;
-    configService = _configService_;
+    storageService = _storageService_;
   }));
 
   afterEach(function () {
@@ -44,7 +44,7 @@ describe('Login Controller:', function () {
 
   it('Expects as config.getSafe() returns false', function () {
     var $scope = {};
-    var configStub = sinon.stub(configService, "getSafe").returns(false);
+    var configStub = sinon.stub(storageService, "getSafe").returns(false);
     var controller = $controller('login.controller', { $scope: $scope });
     expect(configStub.calledOnce).to.be.true;
     expect($location.path()).to.be.equal('/login');
@@ -53,7 +53,7 @@ describe('Login Controller:', function () {
 
   it('Expects as config.getSafe() returns true', function () {
     var $scope = {};
-    var configStub = sinon.stub(configService, "getSafe").returns(true);
+    var configStub = sinon.stub(storageService, "getSafe").returns(true);
     var controller = $controller('login.controller', { $scope: $scope });
     expect(configStub.calledOnce).to.be.true;
     expect($location.path()).to.be.equal('/previous');
@@ -61,8 +61,8 @@ describe('Login Controller:', function () {
 
   it('Should set $scope.location to "This computer!"', function () {
     var $scope = {};
-    var configStub = sinon.stub(configService, "getSafe").returns(true);
-    var configStubLocation = sinon.stub(configService, "getLocation").returns('localhost');
+    var configStub = sinon.stub(storageService, "getSafe").returns(true);
+    var configStubLocation = sinon.stub(storageService, "getLocation").returns('localhost');
     var controller = $controller('login.controller', { $scope: $scope });
     expect(configStub.calledOnce).to.be.true;
     expect($scope.location).to.be.equal('This Computer!');
@@ -70,8 +70,8 @@ describe('Login Controller:', function () {
 
   it('Should set $scope.location to "IP: 192.168.1.1"', function () {
     var $scope = {};
-    var configStub = sinon.stub(configService, "getSafe").returns(true);
-    var configStubLocation = sinon.stub(configService, "getLocation").returns('192.168.1.1');
+    var configStub = sinon.stub(storageService, "getSafe").returns(true);
+    var configStubLocation = sinon.stub(storageService, "getLocation").returns('192.168.1.1');
     var controller = $controller('login.controller', { $scope: $scope });
     expect(configStub.calledOnce).to.be.true;
     expect($scope.location).to.be.equal('IP: 192.168.1.1');
@@ -109,7 +109,7 @@ describe('Login Controller:', function () {
   it('Should change location and safeness when calling onClickBackPrev()', function () {
     var $scope = {};
     var controller = $controller('login.controller', { $scope: $scope });
-    var configSpy = sinon.spy(configService, "setSafe");
+    var configSpy = sinon.spy(storageService, "setSafe");
     var locationSpy = sinon.spy($location, 'path');
     $scope.onClickBackPrev();
     assert(locationSpy.calledWith('/login'));

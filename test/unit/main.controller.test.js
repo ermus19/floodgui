@@ -4,16 +4,18 @@ describe('Main Controller:', function () {
 
   var $controller;
   var $httpBackend;
+  var $rootScope;
 
   beforeEach(function () {
     module('main.controller');
     module('rest.service');
-    module('config.service');
+    module('storage.service');
   });
 
-  beforeEach(inject(function (_$controller_, _$httpBackend_) {
+  beforeEach(inject(function (_$controller_, _$httpBackend_, _$rootScope_) {
     $controller = _$controller_;
     $httpBackend = _$httpBackend_;
+    $rootScope = _$rootScope_;
   }));
 
   it('Expects controller to be defined', function () {
@@ -21,7 +23,7 @@ describe('Main Controller:', function () {
   });
 
   it('Should have variables correctly set', function () {
-    var $scope = {};
+    var $scope = $rootScope.$new();
     var controller = $controller('main.controller', { $scope: $scope });
     expect($scope.showHome).to.be.true;
     expect($scope.showDevices).to.be.false;
@@ -30,7 +32,7 @@ describe('Main Controller:', function () {
   });
 
   it('Should change values correctly on changeView("ports")', function () {
-    var $scope = {};
+    var $scope = $rootScope.$new();
     var controller = $controller('main.controller', { $scope: $scope });
     $scope.changeView('ports');
     expect($scope.showHome).to.be.false;
@@ -40,7 +42,7 @@ describe('Main Controller:', function () {
   });
 
   it('Should change values correctly on changeView("home")', function () {
-    var $scope = {};
+    var $scope = $rootScope.$new();
     var controller = $controller('main.controller', { $scope: $scope });
     $scope.changeView('home');
     expect($scope.showHome).to.be.true;
@@ -50,7 +52,7 @@ describe('Main Controller:', function () {
   });
 
   it('Should change values correctly on changeView("devices")', function () {
-    var $scope = {};
+    var $scope = $rootScope.$new();
     var controller = $controller('main.controller', { $scope: $scope });
     $scope.changeView('devices');
     expect($scope.showHome).to.be.false;
@@ -60,7 +62,7 @@ describe('Main Controller:', function () {
   });
 
   it('Should change values correctly on changeView("about")', function () {
-    var $scope = {};
+    var $scope = $rootScope.$new();
     var controller = $controller('main.controller', { $scope: $scope });
     $scope.changeView('about');
     expect($scope.showHome).to.be.false;
@@ -70,7 +72,7 @@ describe('Main Controller:', function () {
   });
 
   it('Should set default values on changeView("anyValue")', function () {
-    var $scope = {};
+    var $scope = $rootScope.$new();
     var controller = $controller('main.controller', { $scope: $scope });
     $scope.changeView('12345');
     expect($scope.showHome).to.be.true;
