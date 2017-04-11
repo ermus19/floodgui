@@ -29,7 +29,7 @@ angular.module('graph.controller', ['ngVis'])
                     nodes.clear();
                     edges.clear();
 
-                    nodes.add({ id: 0, label: 'SWITCH', image: '../app/assets/icons/controller.png', shape: 'image' });
+                    nodes.add({ id: 0, label: 'SWITCH', image: '../app/assets/icons/switch.png', shape: 'image' });
 
                     for (var j = 0; j < ports; j++) {
                         var portID = j + 1;
