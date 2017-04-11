@@ -2,11 +2,11 @@
 
 angular.module('login.controller', [])
 
-    .controller('login.controller', function ($scope, $window, $location, $timeout, Test, configService) {
+    .controller('login.controller', function ($scope, $window, $location, $timeout, Test, storageService) {
 
-        if (configService.getSafe()) {
+        if (storageService.getSafe()) {
 
-            var location = configService.getLocation();
+            var location = storageService.getLocation();
             $location.url('/previous');
 
             if (location == 'localhost') {
@@ -55,7 +55,7 @@ angular.module('login.controller', [])
 
         $scope.onClickBackPrev = function () {
 
-            configService.setSafe(false);
+            storageService.setSafe(false);
             $location.url('/login');
 
         }
@@ -63,15 +63,8 @@ angular.module('login.controller', [])
         $scope.onClickPrev = function () {
 
             $scope.showLoadingPrev = true;
+            $timeout(checkConnection(location), 1800);
 
-            $timeout(function () {
-
-                if (!checkConnection(location)) {
-
-                    $location.url('/login');
-
-                }
-            }, 1800);
         };
 
 
@@ -79,14 +72,15 @@ angular.module('login.controller', [])
 
             Test('http://' + location + ':8080/wm/core/memory/json').query().$promise.then(function (data) {
 
-                configService.setSafe(true);
-                configService.setLocation(location);
+                storageService.setSafe(true);
+                storageService.setLocation(location);
                 $location.url('/home');
 
             }, function (response) {
 
-                configService.setSafe(false);
+                storageService.setSafe(false);
                 $window.alert("Can't connect to " + location);
+                $location.url('/login');
                 return false;
 
             });

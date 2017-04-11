@@ -2,7 +2,7 @@
 
 angular.module('form.controller', [])
 
-    .controller('form.controller', function ($scope, $window, $location, $timeout, Test, configService) {
+    .controller('form.controller', function ($scope, $window, $location, $timeout, Test, storageService) {
 
         $scope.ipPattern = new RegExp(/^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/);
 
@@ -38,13 +38,13 @@ angular.module('form.controller', [])
 
             Test('http://' + location + ':8080/wm/core/memory/json').query().$promise.then(function (data) {
 
-                configService.setSafe(true);
-                configService.setLocation(location);
+                storageService.setSafe(true);
+                storageService.setLocation(location);
                 $location.url('/home');
 
             }, function (response) {
 
-                configService.setSafe(false);
+                storageService.setSafe(false);
                 $window.alert("Can't connect to: " + location);
                 $scope.ip = null;
                 $scope.submitLoading = false;
