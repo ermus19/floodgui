@@ -14,22 +14,24 @@
 
 <div id="home" ng-show="showHome">
     <div ng-controller="graph.controller">
-        <vis-network data="graphData" options="graphOptions" events="graphEvents"></vis-network>
-        <button id="restore" type="button" ng-click="graphFit()" class="btn btn-info" ng-disabled="btnDisabled">
-            <span ng-hide="showLoading">
+        <div id="networkTopology">
+            <vis-network data="graphData" options="graphOptions" events="graphEvents"></vis-network>
+            <button id="restore" type="button" ng-click="graphFit()" class="btn btn-info" ng-disabled="btnDisabled">
+                <span ng-hide="showLoading">
                 Restore Graph!
-            </span>
-            <span ng-show="showLoading">
+                </span>
+                <span ng-show="showLoading">
                 Loading...
             <i class="fa fa-spinner fa-spin"></i>
-    </button>
+            </button>
+        </div>
     </div>
     <div ng-controller="stats.controller">
         <ul class="list-group">
             <li class="list-group-item active">
                 Floodlight Controller info:
             </li>
-             <li class="list-group-item">
+            <li class="list-group-item">
                 <span ng-show="showUptime">
                     Uptime: {{uptime}} 
                 </span>
@@ -78,38 +80,40 @@
                 </span>
             </li>
         </ul>
-        <ul class="list-group">
-            <li class="list-group-item active">Switch stats:</li>
-            <li class="list-group-item">
-                <span ng-show="showOFversion">
+        <div ng-show="showSwitch">
+            <ul class="list-group">
+                <li class="list-group-item active">Switch stats:</li>
+                <li class="list-group-item">
+                    <span ng-show="showOFversion">
                     OpenFlow version: {{OFVersion}}
                 </span>
-                <span ng-hide="showOFversion">
+                    <span ng-hide="showOFversion">
                     OpenFlow version:
                 <i class="fa fa-gear fa-spin"></i>
                 </span>
-            </li>
-            <li class="list-group-item">
-                <span ng-show="showHostsCount">
+                </li>
+                <li class="list-group-item">
+                    <span ng-show="showHostsCount">
                     Connected hosts: {{hosts}}
                 </span>
-                <span ng-hide="showHostsCount">
+                    <span ng-hide="showHostsCount">
                     Connected hosts:
                 <i class="fa fa-gear fa-spin"></i>
                 </span>
-            </li>
-        </ul>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
 <div id="devices" ng-show="showDevices">
     <div ng-controller="devices.controller">
         <p>Devices view</p>
-    <div>
-</div>
-<div id="ports" ng-show="showPorts">
-    <p>Ports view</p>
-</div>
-<div id="about" ng-show="showAbout">
-    <p>About view</p>
-</div>
-</div>
+        <div>
+        </div>
+        <div id="ports" ng-show="showPorts">
+            <p>Ports view</p>
+        </div>
+        <div id="about" ng-show="showAbout">
+            <p>About view</p>
+        </div>
+    </div>

@@ -2,7 +2,7 @@
 
 angular.module('stats.controller', [])
 
-    .controller('stats.controller', function ($scope, $interval, storageService, utilsService, restService) {
+    .controller('stats.controller', function ($scope, $interval, storageService, devicesService, utilsService, restService) {
 
         $scope.location = storageService.getLocation();
 
@@ -13,6 +13,7 @@ angular.module('stats.controller', [])
         $scope.showFirewallStatus = false;
         $scope.showOFversion = false;
         $scope.showHostsCount = false;
+        $scope.showSwitch = false;
 
         $scope.memoryState = 'list-group-item';
         $scope.apiHealthState = 'list-group-item';
@@ -30,10 +31,13 @@ angular.module('stats.controller', [])
 
             restService.getSwitches().query().$promise.then(function (data) {
 
-                if(data.length > 0 ){
+                if(data.length === 1 ){
+
                     $scope.OFVersion = data[0].openFlowVersion;
                     $scope.showOFversion = true;
-                    storageService.setSwitchID(data[0].switchDPID);
+                    devicesService.setSwitchID(data[0].switchDPID);
+                    $scope.showSwitch = true;
+
                 }
                 
             });

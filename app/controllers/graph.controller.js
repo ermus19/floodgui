@@ -2,55 +2,73 @@
 
 angular.module('graph.controller', ['ngVis'])
 
-    .controller('graph.controller', function ($scope, $interval, $timeout, restService, devicesService, VisDataSet) {
-
-        $scope.showLoading = false;
-        $scope.btnDisabled = true;
-
-        var network;
+    .controller('graph.controller', function ($scope, $interval, $timeout, restService, graphService, devicesService, VisDataSet) {
 
         var nodes = VisDataSet([]);
         var edges = VisDataSet([]);
 
+        $scope.showLoading = false;
+        $scope.btnDisabled = true;
+        var network, nodes, edges;
 
-        var graphDraw = $interval(function () {
+        $scope.startCheckSwitchID = function () {
 
-            var old_devices = devicesService.getDevices();
-            var switchID = devicesService.getSwitchID();
+            var checkSwitchID = $interval(function () {
 
-            restService.getDevices().query().$promise.then(function (data) {
+                var switchID = devicesService.getSwitchID();
 
-                if (old_devices.length === 0) {
+                if (switchID != undefined) {
 
-                    var devices = devicesService.fillDevices(data);
-                    var size = devices.length;
-                    var ports = devicesService.getPorts();
+                    restService.getDevices().query().$promise.then(function (data) {
 
-                    nodes.clear();
-                    edges.clear();
+                        var newPortDevices = devicesService.getPortCount();
+                        var graphData = graphService.getGraphData(newPortDevices, nodes, edges);
 
-                    nodes.add({ id: 0, label: 'SWITCH', image: '../app/assets/icons/switch.png', shape: 'image' });
+                        nodes = graphData[0];
+                        edges = graphData[1];
 
-                    for (var j = 0; j < ports; j++) {
-                        var portID = j + 1;
-                        nodes.add({ id: portID, label: 'PORT: ' + (portID), group: 'ports' });
-                        edges.add({ from: 0, to: portID, color: { color: '#fffff', opacity: 0.3 } });
-                    }
+                    });
 
-                    var nodeID = 100;
+                    $scope.startGraphUpdate();
+                    $interval.cancel(checkSwitchID);
 
-                    for (var i = 0; i < size; i++) {
-                        var port = parseInt(devices[i].port);
-                        if (!isNaN(port)) {
-                            nodeID = nodeID + 1;
-                            nodes.add({ id: nodeID, label: 'DEVICE ' + i, group: 'devices' });
-                            edges.add({ from: nodeID, to: port, color: { color: '#fffff', opacity: 0.3 } });
-                        }
-                    }
                 }
             });
+        }
 
-        }, 10000);
+        $scope.startGraphUpdate = function () {
+
+            var graphUpdate = $interval(function () {
+
+                restService.getDevices().query().$promise.then(function (data) {
+
+                    var oldPortDevices = devicesService.getPortCount();
+                    var devices = devicesService.updateDevices(data);
+                    devicesService.setDevices(devices.slice(0));
+                    var newPortDevices = devicesService.getPortCount();
+                    var switchID = devicesService.getSwitchID();
+
+                    if (devices.length != 0 && switchID != undefined) {
+
+                        var graphData = graphService.updateGraphData(newPortDevices, oldPortDevices, nodes, edges);
+
+                        nodes = graphData[0];
+                        edges = graphData[1];
+
+                    } else if (switchID === undefined) {
+
+                        nodes.clear();
+                        edges.clear();
+                        $interval.cancel(graphUpdate);
+                        $scope.startCheckSwitchID();
+
+                    }
+                });
+
+            }, 10000);
+        }
+
+        $scope.startCheckSwitchID();
 
         var graphZoom = function ($event) {
             $scope.btnDisabled = false;
@@ -87,65 +105,7 @@ angular.module('graph.controller', ['ngVis'])
             }, 800);
         };
 
-        $scope.graphOptions = {
-            autoResize: true,
-            width: '60%',
-            height: '570px',
-            groups: {
-                switch: {
-                    font: {
-                        face: 'times',
-                        size: 14,
-                        strokeWidth: 1.5,
-                        strokeColor: '#000000',
-                        bold: {
-                            color: '#000000'
-                        }
-                    }
-                },
-                ports: {
-                    font: {
-                        face: 'times',
-                        size: 12,
-                        strokeWidth: 0.5,
-                        strokeColor: '#000000',
-                        bold: {
-                            color: '#000000'
-                        }
-                    },
-                    shape: 'icon',
-                    icon: {
-                        face: 'FontAwesome',
-                        code: '\uf150',
-                        size: 20,
-                        color: '#00000'
-                    }
-                },
-                devices: {
-                    font: {
-                        face: 'times',
-                        size: 10,
-                        strokeWidth: 0.5,
-                        strokeColor: '#000000',
-                        bold: {
-                            color: '#000000'
-                        }
-                    },
-                    shape: 'icon',
-                    icon: {
-                        face: 'FontAwesome',
-                        code: '\uf233',
-                        size: 25,
-                        color: '#000000'
-                    }
-                }
-            }
-        };
-
-        $scope.graphData = {
-            nodes: nodes,
-            edges: edges
-        };
+        $scope.graphOptions = graphService.getGraphOptions();
 
         $scope.graphEvents = {
             onload: function (network_object) {
@@ -158,7 +118,13 @@ angular.module('graph.controller', ['ngVis'])
             resize: $scope.graphFit
         };
 
+        $scope.graphData = {
+            nodes: nodes,
+            edges: edges
+        };
+
         $scope.$on('$destroy', function () {
-            $interval.cancel(graphDraw);
+            $interval.cancel(graphUpdate);
+            $interval.cancel(checkSwitchID);
         });
     });

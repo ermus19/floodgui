@@ -9,11 +9,17 @@ angular.module('devices.service', [])
         var ports = 0;
 
         function _getDevices() {
-            return devices.slice(0);
+            var copy = JSON.stringify(devices);
+            return JSON.parse(copy);
         }
 
         function _setDevices(toSave) {
-            devices = toSave.slice(0);
+            var copy = JSON.stringify(toSave);
+            devices = JSON.parse(copy);
+        }
+
+        function _getDevicesCount() {
+            return devices.length;
         }
 
         function _getSwitchID() {
@@ -28,11 +34,18 @@ angular.module('devices.service', [])
             return ports;
         }
 
-        function _fillDevices(data) {
+        function _updateDevices(data) {
+
+            if(data.devices.length === 0){
+                devices = []; 
+                return  devices;
+            }
+
+            devices = [];
 
             for (var i = 0; i < data.devices.length; i++) {
 
-                var device = { id: i, alias: '', type: '', icon: '', mac: '', switch: '', port: '', ipv4: '', dhcpName: '' };
+                var device = { id: i, mac: '', switch: '', port: '', ipv4: '', dhcpName: '' };
 
                 if (data.devices[i].mac.length > 0) {
                     device.mac = data.devices[i].mac[0];
@@ -61,13 +74,39 @@ angular.module('devices.service', [])
             return devices;
         }
 
+        function _getPortCount() {
+
+            var portDevices = [];
+
+            for (var i = 0; i < ports; i++) {
+
+                var devicesCount = 0;
+
+                for (var j = 0; j < devices.length; j++) {
+
+                    var currentPort = parseInt(devices[j].port);
+
+                    if (currentPort === (i + 1)) {
+
+                        devicesCount += 1;
+
+                    }
+                }
+                portDevices.push(devicesCount);
+            }
+
+            return portDevices.slice(0);
+        }
+
         return {
             getDevices: _getDevices,
             setDevices: _setDevices,
+            getDevicesCount: _getDevicesCount,
             getSwitchID: _getSwitchID,
             setSwitchID: _setSwitchID,
             getPorts: _getPorts,
-            fillDevices: _fillDevices
+            getPortCount: _getPortCount,
+            updateDevices: _updateDevices
         }
 
     }]);

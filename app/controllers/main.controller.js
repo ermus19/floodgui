@@ -9,11 +9,9 @@ angular.module('main.controller', [])
         $scope.showPorts = false;
         $scope.showAbout = false;
         $scope.showGraph = false;
-        var devices = [];
-        
-        storageService.setSafe(true);
 
         var location = storageService.getLocation();
+        storageService.setSafe(true);
 
         $scope.changeView = function (view) {
 
@@ -51,11 +49,7 @@ angular.module('main.controller', [])
             }
         }
 
-        var conCheck= $interval(function () {
-            
-            Test('http://' + location + ':8080/wm/core/memory/json').query().$promise.then(function (data){
-
-            });
+        var conCheck = $interval(function () {
 
             Test('http://' + location + ':8080/wm/core/memory/json').query().$promise.then(function (data) {
 
@@ -70,7 +64,7 @@ angular.module('main.controller', [])
             });
         }, 5000);
 
-        $scope.$on('$destroy', function() {
+        $scope.$on('$destroy', function () {
             $interval.cancel(conCheck);
         });
 
