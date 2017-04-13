@@ -30,7 +30,7 @@ angular.module('graph.service', [])
                     nodesID.push(portID);
 
                     for (var j = 0; j < portdeviceNodes[i]; j++) {
-                        nodeID += 1;
+                        nodeID = _genID();
                         nodes.add({ id: nodeID, label: 'DEVICE', group: 'devices' });
                         edges.add({ from: nodeID, to: portID, color: { color: '#fffff', opacity: 0.3 } });
                         nodesID.push(nodeID);
