@@ -22,31 +22,21 @@ function createWindow() {
     width: config.get('width'),
     height: config.get('height'),
     minWidth: 1023,
-    minHeight: 700
-
+    minHeight: 700,
+    show: false
   });
 
-  if(config.has('set') && config.get('set')){
-    
-    win.loadURL(url.format({
+  win.loadURL(url.format({
 
-    pathname: path.join(__dirname, './app/views/load.view.html'),
+    pathname: path.join(__dirname, './app/index.html'),
     protocol: 'file:',
     slashes: true
 
   }));
 
-  }else{
-  
-    win.loadURL(url.format({
-
-    pathname: path.join(__dirname, './app/views/login.view.html'),
-    protocol: 'file:',
-    slashes: true
-
-  }));
-
-  }
+  win.once('ready-to-show', () => {
+    win.show()
+  })
 
   //win.webContents.openDevTools();
 

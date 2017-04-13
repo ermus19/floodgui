@@ -10,7 +10,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha','chai'],
+    frameworks: ['mocha','chai','sinon'],
 
 
     // list of files / patterns to load in the browser
@@ -18,9 +18,13 @@ module.exports = function(config) {
       './node_modules/angular/angular.js',
       './node_modules/angular-mocks/angular-mocks.js',
       './node_modules/angular-resource/angular-resource.js',
+      './node_modules/angular-route/angular-route.js',
+      './node_modules/angular-visjs/angular-vis.js',
+      './node_modules/ngstorage/ngStorage.js',
+      './app/*.js',
       './app/services/*.js',
       './app/controllers/*.js',
-      './test/karma/*.js'
+      './test/unit/*.js'
     ],
 
 

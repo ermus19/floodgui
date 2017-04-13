@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 var helpers = require('./test.helpers');
 
 
@@ -47,12 +47,7 @@ describe('Application default launch:', function () {
 
   it('Should load login view', function () {
     return app.client.waitUntilWindowLoaded()
-      .getUrl().should.eventually.match(/login.view.html/);
-  });
-
-  it('Should have login form invisible', function () {
-    return app.client.waitUntilWindowLoaded()
-      .isVisible('.form').should.eventually.be.false;
+      .getUrl().should.eventually.match(/login/);
   });
 
   it('Should set fullscreen mode', function () {

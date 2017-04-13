@@ -2,84 +2,88 @@
 
 angular.module('login.controller', [])
 
-    .controller('login.controller', function ($scope, $timeout, Test) {
+    .controller('login.controller', function ($scope, $window, $location, $timeout, Test, storageService) {
 
-        $scope.showLoading = false;
-        $scope.submitLoading = false;
+        if (storageService.getSafe()) {
+
+            var location = storageService.getLocation();
+            $location.url('/previous');
+
+            if (location == 'localhost') {
+
+                $scope.location = 'This Computer!';
+
+            } else {
+
+                $scope.location = 'IP: ' + location;
+
+            }
+
+        } else {
+
+            $location.url('/login');
+        }
+
         $scope.thisClicked = false;
-        $scope.showForm = false;
-        $scope.ipPattern = new RegExp(/^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/);
+        $scope.showLoading = false;
+        $scope.showLoadingPrev = false;
 
         $scope.onClickThis = function () {
 
             $scope.showLoading = true;
             $scope.thisClicked = true;
 
-            Test('http://localhost:8080/wm/core/memory/json').query().$promise.then(function (data) {
+            $timeout(function () {
 
-                console.log(data.toJSON());
-                $timeout(function () {
-                    window.location.href = './main.view.html';
-                    config.set('set', true);
-                    config.set('location', 'localhost');
-                }, 4000);
+                if (!checkConnection('localhost')) {
 
-            }, function (error) {
+                    $scope.showLoading = false;
+                    $scope.thisClicked = false;
 
-                window.alert("Can't connect to localhost");
-                $scope.showLoading = false;
-                $scope.thisClicked = false;
+                }
 
-            });
+            }, 1800);
 
         };
 
         $scope.onClickOther = function () {
 
-            $scope.showForm = true;
+            $location.url('/form');
 
         }
 
-        $scope.onClickBack = function () {
 
-            $scope.showForm = false;
-            $scope.ip = null;
-            $scope.ipForm.$setPristine();
+        $scope.onClickBackPrev = function () {
+
+            storageService.setSafe(false);
+            $location.url('/login');
 
         }
 
-        $scope.onClickSubmit = function () {
+        $scope.onClickPrev = function () {
 
-            $scope.submitLoading = true;
-            $timeout(4000);
+            $scope.showLoadingPrev = true;
+            $timeout(checkConnection(location), 1800);
 
-            Test('http://' + $scope.ip + ':8080/wm/core/memory/json').query().$promise.then(function (data) {
+        };
 
-                console.log(JSON.stringify(data.toJSON()));
-                window.location.href = './home.html';
-                config.set('set', true);
-                config.set('location', $scope.ip);
+
+        var checkConnection = function (location) {
+
+            Test('http://' + location + ':8080/wm/core/memory/json').query().$promise.then(function (data) {
+
+                storageService.setSafe(true);
+                storageService.setLocation(location);
+                $location.url('/home');
 
             }, function (response) {
 
-                window.alert("Can't connect to: " + $scope.ip);
-                $scope.submitLoading = false;
-                $scope.ip = null;
-                $scope.ipForm.$setPristine();
+                storageService.setSafe(false);
+                $window.alert("Can't connect to " + location);
+                $location.url('/login');
+                return false;
 
             });
-        };
-
-        $scope.filterValue = function ($event) {
-
-            var input = String.fromCharCode($event.keyCode);
-
-            if ((isNaN(input) && input != '.') || ($event.keyCode == 32)) {
-
-                $event.preventDefault();
-                console.log("Input not valid");
-
-            }
         };
 
     });

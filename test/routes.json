@@ -1,0 +1,17 @@
+{
+    "/wm/core/memory/json": "/memory",
+    "/wm/core/health/json": "/health",
+    "/wm/core/version/json": "/version",
+    "/wm/core/system/uptime/json": "/uptime",
+    "/wm/firewall/module/status/json": "/firewall",
+    "/wm/core/controller/summary/json": "/summary",
+    "/wm/core/controller/switches/json": "/switches",
+    "/wm/device/": "/devices",
+    "/wm/statistics/bandwidth/00:00:00:e0:4c:53:44:58/1/json": "/portbw1",
+    "/wm/statistics/bandwidth/00:00:00:e0:4c:53:44:58/2/json": "/portbw2",
+    "/wm/statistics/bandwidth/00:00:00:e0:4c:53:44:58/3/json": "/portbw3",
+    "/wm/statistics/bandwidth/00:00:00:e0:4c:53:44:58/4/json": "/portbw4",
+    "/wm/statistics/bandwidth/00:00:00:e0:4c:53:44:58/5/json": "/portbw5",
+    "/wm/statistics/bandwidth/00:00:00:e0:4c:53:44:58/6/json": "/portbw6"
+
+}
