@@ -25,13 +25,12 @@ angular.module('stats.controller', [])
             $scope.version = version;
             $scope.showVersion = true;
 
-
         });
         var getStats = $interval(function () {
 
             restService.getSwitches().query().$promise.then(function (data) {
 
-                if(data.length === 1 ){
+                if (data.length === 1) {
 
                     $scope.OFVersion = data[0].openFlowVersion;
                     $scope.showOFversion = true;
@@ -39,11 +38,11 @@ angular.module('stats.controller', [])
                     $scope.showSwitch = true;
 
                 }
-                
+
             });
 
-            restService.getSummary().query().$promise.then(function(data){
-                
+            restService.getSummary().query().$promise.then(function (data) {
+
                 $scope.hosts = data['# hosts'];
                 $scope.showHostsCount = true;
 
