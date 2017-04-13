@@ -3,9 +3,6 @@
 angular.module('storage.service', ['ngStorage'])
 
     .factory('storageService', function ($localStorage) {
-        $localStorage = $localStorage.$default({
-            devices: []
-        });
         return {
             setSafe: function (state) {
                 if (typeof (state) === "boolean") {
