@@ -80,6 +80,15 @@
                 </span>
             </li>
         </ul>
+        <div ng-hide="showSwitch">
+            <ul class="list-group">
+                <li class="list-group-item active">Topology info:</li>
+                <li class="list-group-item">
+                FloodGUI didn't find any switch attached to the controller yet: 
+                the Switch stats and the network topology will only be shown if a switch is attached to the controller!
+                </li>
+            </ul>
+        </div>
         <div ng-show="showSwitch">
             <ul class="list-group">
                 <li class="list-group-item active">Switch stats:</li>
