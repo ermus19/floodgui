@@ -37,6 +37,11 @@ angular.module('stats.controller', [])
                     devicesService.setSwitchID(data[0].switchDPID);
                     $scope.showSwitch = true;
 
+                } else{
+
+                    devicesService.setSwitchID(undefined);
+                    $scope.showSwitch = false;
+
                 }
 
             });
