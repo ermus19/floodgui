@@ -2,9 +2,7 @@
 
 angular.module('stats.controller', [])
 
-    .controller('stats.controller', function ($scope, $interval, storageService, devicesService, utilsService, restService) {
-
-        $scope.location = storageService.getLocation();
+    .controller('stats.controller', function ($scope, $interval, storageService, devicesService, portsService, utilsService, restService) {
 
         $scope.showUptime = false;
         $scope.showMemory = false;
@@ -37,11 +35,10 @@ angular.module('stats.controller', [])
                     devicesService.setSwitchID(data[0].switchDPID);
                     $scope.showSwitch = true;
 
-                } else{
+                } else {
 
                     devicesService.setSwitchID(undefined);
                     $scope.showSwitch = false;
-
                 }
 
             });
