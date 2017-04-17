@@ -81,17 +81,26 @@ angular.module('rest.service', ['ngResource'])
                     stripTrailingSlashes: false
                 });
             },
-            getPortStats: function () {
-                return $resource('http://' + storageService.getLocation() + ':8080/wm/statistics/bandwidth/:switchID/:portID/json', {}, {
+            getPorts: function () {
+                return $resource('http://' + storageService.getLocation() + ':8080/wm/core/switch/all/port-desc/json', {}, {
                     query: {
                         method: 'GET',
+                        isArray: false,
+                        timeout: 5000
+                    }
+                });
+            },
+            getPortsStats: function () {
+                return $resource('http://' + storageService.getLocation() + ':8080/wm/statistics/bandwidth/:switchID/all/json', {}, {
+                    query: {
+                        method: 'GET',
+                        isArray: true,
                         params: {
-                            switchID: '@switchID',
-                            portID: '@portID'
+                            switchID: '@switchID'
                         },
                         timeout: 5000
                     }
-                })
+                });
             }
 
         }
