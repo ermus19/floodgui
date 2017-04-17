@@ -5,9 +5,9 @@
         </div>
         <ul class="nav navbar-nav">
             <li ng-class="{ active: showHome}"><a href="" ng-click="changeView('home')">Home</a></li>
-            <li ng-class="{ active: showDevices}"><a href="" ng-click="changeView('devices')">Devices</a></li>
-            <li ng-class="{ active: showPorts}"><a href="" ng-click="changeView('ports')">Ports</a></li>
-            <li ng-class="{ active: showAbout}"><a href="" ng-click="changeView('about')">About</a></li>
+            <li ng-class="{ active: showDevices}" ng-show="$root.showMenu"><a href="" ng-click="changeView('devices')">Devices</a></li>
+            <li ng-class="{ active: showPorts}" ng-show="$root.showMenu"><a href="" ng-click="changeView('ports')">Ports</a></li>
+            <li ng-class="{ active: showAbout}"><a href="" ng-click="showAboutInfo()">About</a></li>
         </ul>
     </div>
 </nav>
@@ -116,12 +116,40 @@
 </div>
 <div id="devices" ng-show="showDevices">
     <div ng-controller="devices.controller">
-        <div ng-repeat="device in devices">
-            <p>{{device.mac}}</p>
+        <div ng-show="showDevicesList">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>DHCP Name</th>
+                        <th>IPv4</th>
+                        <th>IPv6</th>
+                        <th>MAC</th>
+                        <th>Port</th>
+                        <th>Last Seen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="device in devices">
+                        <td>{{device.dhcpName}}</td>
+                        <td>{{device.ipv4}}</td>
+                        <td>{{device.ipv6}}</td>
+                        <td>{{device.mac}}</td>
+                        <td>{{device.port}}</td>
+                        <td>{{device.lastSeen}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <div id="ports" ng-show="showPorts">
+        <div ng-show="showEmptyDevices">
+            <p class="empty-devices-message">
+                FloodGUI couldn't find any device attached to the switch connected to the controller! 
+            </p>
         </div>
-        <div id="about" ng-show="showAbout">
-            <p>About view</p>
+        <div ng-show="showDevicesLoading">
+            <p> Devices info loading...</p>
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
         </div>
     </div>
+</div>
+<div id="ports" ng-show="showPorts">
+</div>
