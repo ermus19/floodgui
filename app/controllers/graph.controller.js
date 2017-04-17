@@ -2,7 +2,7 @@
 
 angular.module('graph.controller', ['ngVis'])
 
-    .controller('graph.controller', function ($scope, $rootScope, $interval, $timeout, restService, graphService, devicesService, VisDataSet) {
+    .controller('graph.controller', function ($scope, $rootScope, $location, $interval, $timeout, restService, graphService, devicesService, VisDataSet) {
 
         var nodes = VisDataSet([]);
         var edges = VisDataSet([]);
@@ -59,6 +59,8 @@ angular.module('graph.controller', ['ngVis'])
 
                     } else if (switchID === undefined) {
 
+                        $location.url('home');
+                        $rootScope.showMenu = false;
                         nodes.clear();
                         edges.clear();
                         $interval.cancel(graphUpdate);
