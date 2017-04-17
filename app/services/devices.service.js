@@ -2,7 +2,7 @@
 
 angular.module('devices.service', [])
 
-    .factory('devicesService', ['restService', 'utilsService', function (restService, utilsService) {
+    .factory('devicesService', ['utilsService', function (utilsService) {
 
         var devices = [];
         var switchID = undefined;
