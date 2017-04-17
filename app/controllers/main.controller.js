@@ -2,13 +2,15 @@
 
 angular.module('main.controller', [])
 
-    .controller('main.controller', function ($scope, $window, $location, $interval, Test, storageService) {
+    .controller('main.controller', function ($scope, $rootScope, $window, $location, $interval, Test, storageService) {
 
         $scope.showHome = true;
         $scope.showDevices = false;
         $scope.showPorts = false;
-        $scope.showAbout = false;
         $scope.showGraph = false;
+        $scope.showAbout = false;
+
+        $rootScope.showMenu = false;
 
         var location = storageService.getLocation();
         storageService.setSafe(true);
@@ -32,12 +34,6 @@ angular.module('main.controller', [])
                 $scope.showDevices = false;
                 $scope.showPorts = true;
                 $scope.showAbout = false;
-
-            } else if (view === 'about') {
-                $scope.showHome = false;
-                $scope.showDevices = false;
-                $scope.showPorts = false;
-                $scope.showAbout = true;
 
             } else {
 
@@ -63,6 +59,12 @@ angular.module('main.controller', [])
 
             });
         }, 5000);
+
+        $scope.showAboutInfo = function () {
+
+            $window.alert("FloodGUI v1.0.0\n\nMore info at github.com/ermus19/floodgui\n\n@ermus19 2017");
+
+        }
 
         $scope.$on('$destroy', function () {
             $interval.cancel(conCheck);
