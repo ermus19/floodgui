@@ -61,16 +61,6 @@ describe('Main Controller:', function () {
     expect($scope.showAbout).to.be.false;
   });
 
-  it('Should change values correctly on changeView("about")', function () {
-    var $scope = $rootScope.$new();
-    var controller = $controller('main.controller', { $scope: $scope });
-    $scope.changeView('about');
-    expect($scope.showHome).to.be.false;
-    expect($scope.showDevices).to.be.false;
-    expect($scope.showPorts).to.be.false;
-    expect($scope.showAbout).to.be.true;
-  });
-
   it('Should set default values on changeView("anyValue")', function () {
     var $scope = $rootScope.$new();
     var controller = $controller('main.controller', { $scope: $scope });
