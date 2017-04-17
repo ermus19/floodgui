@@ -62,12 +62,6 @@ angular.module('graph.service', [])
                 newPorts += 1;
             }
 
-            console.log("Old hosts: " + oldHosts);
-            console.log("New hosts: " + newHosts);
-            console.log("Old ports: " + oldPorts);
-            console.log("New ports: " + newPorts);
-
-
             if (oldPortDevices.length > newPortDevices.length) {
 
                 var portsToDelete = oldPorts - newPorts;
