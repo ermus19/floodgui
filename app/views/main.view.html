@@ -152,4 +152,37 @@
     </div>
 </div>
 <div id="ports" ng-show="showPorts">
+    <div ng-controller="ports.controller">
+        <div ng-show="showPortsList">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Port Number</th>
+                        <th>Name</th>
+                        <th>Max speed</th>
+                        <th>Transmission Bandwidth</th>
+                        <th>Reception Bandwidth</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="port in ports">
+                        <td>{{port.port_number}}</td>
+                        <td>{{port.name}}</td>
+                        <td>{{port.max_speed}}</td>
+                        <td>{{port.tx_speed}}</td>
+                        <td>{{port.rx_speed}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-show="showEmptyDevices">
+            <p class="empty-devices-message">
+                FloodGUI couldn't find any device attached to the switch connected to the controller! 
+            </p>
+        </div>
+        <div ng-show="showDevicesLoading">
+            <p> Devices info loading...</p>
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+        </div>
+    </div>
 </div>
