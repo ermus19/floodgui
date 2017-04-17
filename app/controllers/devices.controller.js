@@ -2,15 +2,33 @@
 
 angular.module('devices.controller', [])
 
-    .controller('devices.controller', function ($scope, $interval, devicesService) {
+    .controller('devices.controller', function ($scope, $interval, $timeout, devicesService) {
 
-        
-        var getDevices = $interval(function () {
-            
-            $scope.devices = devicesService.getDevices();
-            console.log($scope.devices);
+        $scope.showEmptyDevices = false;
+        $scope.showDevicesList = false;
+        $scope.showDevicesLoading = true;
 
-        }, 3000);
-        
+        var updateDevices = $interval(function () {
+
+            var devices = devicesService.getDevices();
+            $scope.showDevicesLoading = false;
+
+            if (devices.lenght === 0) {
+
+                $scope.showEmptyDevices = true;
+
+            } else {
+
+                $scope.devices = devices;
+                $scope.showDevicesList = true;
+                $scope.showEmptyDevices = false;
+
+            }
+
+        }, 10000);
+
+        $scope.$on('$destroy', function () {
+            $interval.cancel(updateDevices);
+        });
 
     });
