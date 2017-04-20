@@ -142,7 +142,7 @@
         </div>
         <div ng-show="showEmptyDevices">
             <p class="empty-devices-message">
-                FloodGUI couldn't find any device attached to the switch connected to the controller! 
+                FloodGUI couldn't find any device attached to the switch connected to the controller!
             </p>
         </div>
         <div ng-show="showDevicesLoading">
@@ -162,6 +162,8 @@
                         <th>Max speed</th>
                         <th>Transmission Bandwidth</th>
                         <th>Reception Bandwidth</th>
+                        <th>Port Status</th>
+                        <th>Port actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -171,13 +173,27 @@
                         <td>{{port.max_speed}}</td>
                         <td>{{port.tx_speed}}</td>
                         <td>{{port.rx_speed}}</td>
+                        <td>{{port.status}}</td>
+                        <td ng-if="(port.status == 'enabled' && port.port_number != 'local')">
+                            <button id="disablePortButton" type="button" ng-click="disablePort(port.port_number)" class="btn">
+                                Disable Port
+                            </button>
+                        </td>
+                        <td ng-if="(port.status == 'disabled' && port.port_number != 'local')">
+                            <button id="enablePortButton" type="button" ng-click="enablePort(port.port_number)" class="btn">
+                                Enable Port
+                            </button>
+                        </td>
+                        <td ng-if="port.port_number == 'local'">
+                            -
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div ng-show="showEmptyDevices">
             <p class="empty-devices-message">
-                FloodGUI couldn't find any device attached to the switch connected to the controller! 
+                FloodGUI couldn't find any device attached to the switch connected to the controller!
             </p>
         </div>
         <div ng-show="showDevicesLoading">
