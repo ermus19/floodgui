@@ -2,91 +2,55 @@
 
 angular.module('ports.controller', [])
 
-    .controller('ports.controller', function ($scope, $interval, $timeout, restService, devicesService, portsService) {
+    .controller('ports.controller', function ($scope, $rootScope, $window, $interval, $location, $timeout, restService, devicesService, portsService) {
 
         $scope.showEmptyPorts = false;
         $scope.showPortsList = false;
         $scope.showPortsLoading = true;
         $scope.ports = [];
 
-        $scope.initGetPorts = function () {
+        var getPorts = $interval(function () {
 
-            var getPorts = $interval(function () {
+            var ports = portsService.getPorts();
+            var switchID = devicesService.getSwitchID();
 
-                var ports = portsService.getPorts();
-                var switchID = devicesService.getSwitchID();
+            if (switchID !== undefined) {
 
-                if (switchID !== undefined) {
+                restService.getPorts().query().$promise.then(function (data) {
 
-                    restService.getPorts().query().$promise.then(function (data) {
+                    var ports = portsService.updatePorts(data);
+                    portsService.setPorts(data);
 
-                        var ports = portsService.updatePorts(data);
-                        portsService.setPorts(data);
+                    if (ports.length != 0) {
+
                         $scope.ports = ports;
+                        $scope.showPortsList = true;
+                    }
 
-                    });
-
-                    $interval.cancel(getPorts);
-                    $scope.startPortsUpdate();
-
-                }
-            });
-        }
-
-        $scope.startPortsUpdate = function () {
-
-            var updatePorts = $interval(function () {
-
-                var switchID = devicesService.getSwitchID();
+                });
 
                 restService.getPortsStats().query({ switchID: switchID }).$promise.then(function (data) {
 
-
-                    $timeout(function () {
-
-                        $scope.ports = portsService.updatePortStats($scope.ports, data);
-
-                        if ($scope.ports.length === 0) {
-
-                            $scope.showEmptyPorts = true;
-
-                        } else {
-
-                            $scope.showPortsList = true;
-
-                        }
-
-                    });
+                    $scope.ports = portsService.updatePortStats($scope.ports, data);
 
                 });
 
                 restService.getPortsState().query().$promise.then(function (data) {
 
-                    $timeout(function () {
+                    $scope.ports = portsService.updatePortStates(switchID, $scope.ports, data);
 
-                        $scope.ports = portsService.updatePortStates(switchID, $scope.ports, data);
-
-                        if ($scope.ports.length === 0) {
-
-                            $scope.showEmptyPorts = true;
-
-                        } else {
-                            $scope.showPortsList = true;
-
-                        }
-                    });
                 });
 
-                $scope.showPortsLoading = false;
 
-                if (switchID === undefined) {
+            } else {
 
-                    $location.url('/home');
-                    $rootScope.showMenu = false;
-                }
+                $location.url('/home');
+                $rootScope.showMenu = false;
 
-            }, 1000);
-        }
+            }
+
+        }, 1500);
+
 
         $scope.enablePort = function (portNumber) {
 
@@ -95,12 +59,14 @@ angular.module('ports.controller', [])
             restService.enablePort().save({ dpid: switchID, port: portNumber }).$promise.then(function (data) {
 
                 if (!data.success) {
-                    $window.alert("Couldn't enable port " + portNumber);
+
+                    $window.alert("Couldn't enable port: " + portNumber);
+
                 }
 
-            }, function (error) {
+            }, function (response) {
 
-                $window.alert("Couldn't enable port " + portNumber + "\n" + error);
+                $window.alert("Couldn't enable port: " + portNumber + "\n" + response.status + " " + response.statusText);
 
             });
         };
@@ -112,21 +78,20 @@ angular.module('ports.controller', [])
             restService.disablePort().save({ dpid: switchID, port: portNumber }).$promise.then(function (data) {
 
                 if (!data.success) {
-                    $window.alert("Couldn't disable port " + portNumber);
+
+                    $window.alert("Couldn't disable port: " + portNumber);
+
                 }
 
-            }, function (error) {
+            }, function (response) {
 
-                $window.alert("Couldn't disable port " + portNumber + "\n" + error);
+                $window.alert("Couldn't disable port: " + portNumber + "\n" + response.status + " " + response.statusText);
 
             });
         };
 
-        $scope.initGetPorts();
-
         $scope.$on('$destroy', function () {
             $interval.cancel(getPorts);
-            $interval.cancel(updatePorts);
         });
 
     });

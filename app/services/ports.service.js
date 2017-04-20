@@ -57,6 +57,8 @@ angular.module('ports.service', [])
                     if (old_ports[i].port_number === ports[j].port_number) {
 
                         ports[j].status = old_ports[i].status;
+                        ports[j].tx_speed = old_ports[i].tx_speed;
+                        ports[j].rx_speed = old_ports[i].rx_speed;
 
                     }
                 }

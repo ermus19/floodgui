@@ -24,6 +24,7 @@ angular.module('stats.controller', [])
             $scope.showVersion = true;
 
         });
+
         var getStats = $interval(function () {
 
             restService.getSwitches().query().$promise.then(function (data) {

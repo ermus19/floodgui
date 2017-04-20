@@ -32,7 +32,7 @@ angular.module('graph.controller', ['ngVis'])
                     $scope.startGraphUpdate();
                     $interval.cancel(checkSwitchID);
 
-                }
+                } 
             });
         }
 
@@ -59,8 +59,8 @@ angular.module('graph.controller', ['ngVis'])
 
                     } else if (switchID === undefined) {
 
-                        $location.url('home');
                         $rootScope.showMenu = false;
+                        $location.url('home');
                         nodes.clear();
                         edges.clear();
                         $interval.cancel(graphUpdate);
@@ -128,7 +128,7 @@ angular.module('graph.controller', ['ngVis'])
         };
 
         $scope.$on('$destroy', function () {
-            $interval.cancel(graphUpdate);
+            $interval.cancel($scope.graphUpdate);
             $interval.cancel(checkSwitchID);
         });
     });
