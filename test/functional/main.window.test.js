@@ -29,4 +29,16 @@ describe('Main window interactions', function () {
             .getUrl().should.eventually.match(/home/);
 
     });
+
+    it('Nav var should be visible', function () {
+        return app.client.waitUntilWindowLoaded()
+        .isVisible('.nav').should.eventually.be.true;
+    });
+
+    it('Topology canvas should be visible', function () {
+        return app.client.waitUntilWindowLoaded()
+        .isVisible('#networkTopology').should.eventually.be.true;
+    });
+
+    
 });
