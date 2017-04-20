@@ -19,9 +19,11 @@ angular.module('devices.controller', [])
 
             } else {
 
-                $scope.devices = devices;
-                $scope.showDevicesList = true;
-                $scope.showEmptyDevices = false;
+                $timeout(function () {
+                    $scope.devices = devices;
+                    $scope.showDevicesList = true;
+                    $scope.showEmptyDevices = false;
+                });
 
             }
 
