@@ -8,5 +8,6 @@
     "/wm/core/controller/switches/json": "/switches",
     "/wm/device/": "/devices",
     "/wm/core/switch/all/port-desc/json": "/ports",
-    "/wm/statistics/bandwidth/00:00:00:e0:4c:53:44:58/all/json": "/portbw"
+    "/wm/statistics/bandwidth/00:00:00:e0:4c:53:44:58/all/json": "/portbw",
+    "/wm/portblocker/list/json": "/portsStatus"
 }
