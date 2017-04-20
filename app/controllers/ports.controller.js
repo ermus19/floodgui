@@ -7,6 +7,7 @@ angular.module('ports.controller', [])
         $scope.showEmptyPorts = false;
         $scope.showPortsList = false;
         $scope.showPortsLoading = true;
+        $scope.ports = [];
 
         $scope.initGetPorts = function () {
 
@@ -37,36 +38,95 @@ angular.module('ports.controller', [])
             var updatePorts = $interval(function () {
 
                 var switchID = devicesService.getSwitchID();
+
                 restService.getPortsStats().query({ switchID: switchID }).$promise.then(function (data) {
 
-                    console.log($scope.ports);
-                    $scope.ports = portsService.updatePortStats($scope.ports, data);
-                    console.log($scope.ports);
-                    $scope.showPortsList = true;
 
+                    $timeout(function () {
+
+                        $scope.ports = portsService.updatePortStats($scope.ports, data);
+
+                        if ($scope.ports.length === 0) {
+
+                            $scope.showEmptyPorts = true;
+
+                        } else {
+
+                            $scope.showPortsList = true;
+
+                        }
+
+                    });
+
+                });
+
+                restService.getPortsState().query().$promise.then(function (data) {
+
+                    $timeout(function () {
+
+                        $scope.ports = portsService.updatePortStates(switchID, $scope.ports, data);
+
+                        if ($scope.ports.length === 0) {
+
+                            $scope.showEmptyPorts = true;
+
+                        } else {
+                            $scope.showPortsList = true;
+
+                        }
+                    });
                 });
 
                 $scope.showPortsLoading = false;
 
-                if (ports.lenght === 0) {
+                if (switchID === undefined) {
 
-                    $scope.showEmptyPorts = true;
-
-                } else if (switchID === undefined) {
-
-                    $location.url('home');
+                    $location.url('/home');
                     $rootScope.showMenu = false;
-                    $interval.cancel(updatePorts);
                 }
 
-            }, 2500);
+            }, 1000);
         }
+
+        $scope.enablePort = function (portNumber) {
+
+            var switchID = devicesService.getSwitchID();
+
+            restService.enablePort().save({ dpid: switchID, port: portNumber }).$promise.then(function (data) {
+
+                if (!data.success) {
+                    $window.alert("Couldn't enable port " + portNumber);
+                }
+
+            }, function (error) {
+
+                $window.alert("Couldn't enable port " + portNumber + "\n" + error);
+
+            });
+        };
+
+        $scope.disablePort = function (portNumber) {
+
+            var switchID = devicesService.getSwitchID();
+
+            restService.disablePort().save({ dpid: switchID, port: portNumber }).$promise.then(function (data) {
+
+                if (!data.success) {
+                    $window.alert("Couldn't disable port " + portNumber);
+                }
+
+            }, function (error) {
+
+                $window.alert("Couldn't disable port " + portNumber + "\n" + error);
+
+            });
+        };
 
         $scope.initGetPorts();
 
         $scope.$on('$destroy', function () {
-            $interval.cancel(updatePorts);
             $interval.cancel(getPorts);
+            $interval.cancel(updatePorts);
         });
 
     });

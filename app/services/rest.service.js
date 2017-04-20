@@ -101,8 +101,29 @@ angular.module('rest.service', ['ngResource'])
                         timeout: 5000
                     }
                 });
+            },
+            getPortsState: function () {
+                return $resource('http://' + storageService.getLocation() + ':8080/wm/portblocker/list/json', {}, {
+                    query: {
+                        method: 'GET',
+                        timeout: 5000
+                    }
+                });
+            },
+            disablePort: function () {
+                return $resource('http://' + storageService.getLocation() + ':8080/wm/portblocker/disable/json', {}, {
+                    save: {
+                        method: 'POST'
+                    }
+                });
+            },
+            enablePort: function () {
+                return $resource('http://' + storageService.getLocation() + ':8080/wm/portblocker/enable/json', {}, {
+                    save: {
+                        method: 'POST'
+                    }
+                });
             }
-
         }
     }])
     .config(['$resourceProvider', function ($resourceProvider) {
