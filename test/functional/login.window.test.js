@@ -1,7 +1,7 @@
 'use strict';
 var helpers = require('./test.helpers');
 
-describe('Login window interactions', function () {
+describe('Login window interactions:', function () {
 
   this.timeout(10000);
 

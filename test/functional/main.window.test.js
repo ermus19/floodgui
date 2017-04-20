@@ -1,7 +1,7 @@
 'use strict';
 var helpers = require('./test.helpers');
 
-describe('Main window interactions', function () {
+describe('Main window interactions:', function () {
 
     this.timeout(30000);
 
