@@ -2,7 +2,7 @@
 
 angular.module('devices.service', [])
 
-    .factory('devicesService', ['restService', 'storageService', function (restService, storageService) {
+    .factory('devicesService', ['utilsService', function (utilsService) {
 
         var devices = [];
         var switchID = undefined;
@@ -45,7 +45,7 @@ angular.module('devices.service', [])
 
             for (var i = 0; i < data.devices.length; i++) {
 
-                var device = { id: i, mac: '', switch: '', port: '', ipv4: '', dhcpName: '' };
+                var device = { id: i, mac: '-', switch: '-', port: '-', ipv4: '-', ipv6: '-', dhcpName: '-', lastSeen: '-' };
 
                 if (data.devices[i].mac.length > 0) {
                     device.mac = data.devices[i].mac[0];
@@ -62,6 +62,15 @@ angular.module('devices.service', [])
                 if (data.devices[i].ipv4.length > 0) {
                     device.ipv4 = data.devices[i].ipv4[0];
                 }
+
+                if (data.devices[i].ipv6.length > 0) {
+                    device.ipv6 = data.devices[i].ipv6[0];
+                }
+
+                if (data.devices[i].hasOwnProperty('lastSeen')) {
+                    device.lastSeen = utilsService.convertTime(data.devices[i].lastSeen);
+                }
+
 
                 if (data.devices[i].hasOwnProperty('dhcpClientName')) {
                     device.dhcpName = data.devices[i].dhcpClientName;

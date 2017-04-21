@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('main.app', ['ngRoute', 'login.controller', 'form.controller', 'main.controller', 'stats.controller', 'graph.controller', 'devices.controller', 'rest.service', 'devices.service','graph.service', 'storage.service', 'utils.service'])
+angular.module('main.app', ['ngRoute', 'login.controller', 'form.controller', 'main.controller', 'stats.controller', 'graph.controller', 'devices.controller', 'ports.controller', 'rest.service', 'devices.service', 'ports.service', 'graph.service', 'storage.service', 'utils.service'])
 
 
     .config(function ($routeProvider) {
@@ -24,4 +24,8 @@ angular.module('main.app', ['ngRoute', 'login.controller', 'form.controller', 'm
             .otherwise({
                 redirectTo: '/login'
             })
-    });
+    })
+    
+    .config(['$qProvider', function ($qProvider) {
+        $qProvider.errorOnUnhandledRejections(false);
+    }]);

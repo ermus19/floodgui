@@ -1,7 +1,7 @@
 'use strict';
 var helpers = require('./test.helpers');
 
-describe('Previous window interactions', function () {
+describe('Previous window interactions:', function () {
 
     this.timeout(30000);
 

@@ -52,6 +52,28 @@ angular.module('utils.service', [])
                     value: value,
                     state: state
                 };
+            },
+            convertBw: function (bw) {
+
+                var convertedBw;
+
+                if (bw < 1000) {
+
+                    convertedBw = bw;
+                    return convertedBw + ' bit/s';
+
+                }
+                else if (bw < 1000000) {
+                    convertedBw = bw / 1000;
+                    return convertedBw.toFixed(2) + ' kbit/s';
+                } else if (bw === 0) {
+
+                    return '-';
+
+                } else {
+                    convertedBw = bw / 1000000;
+                    return convertedBw.toFixed(2) + ' Mbit/s';
+                }
             }
         }
     }]);

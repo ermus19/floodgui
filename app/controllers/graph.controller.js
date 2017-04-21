@@ -2,7 +2,7 @@
 
 angular.module('graph.controller', ['ngVis'])
 
-    .controller('graph.controller', function ($scope, $interval, $timeout, restService, graphService, devicesService, VisDataSet) {
+    .controller('graph.controller', function ($scope, $rootScope, $location, $interval, $timeout, restService, graphService, devicesService, VisDataSet) {
 
         var nodes = VisDataSet([]);
         var edges = VisDataSet([]);
@@ -32,7 +32,7 @@ angular.module('graph.controller', ['ngVis'])
                     $scope.startGraphUpdate();
                     $interval.cancel(checkSwitchID);
 
-                }
+                } 
             });
         }
 
@@ -55,8 +55,12 @@ angular.module('graph.controller', ['ngVis'])
                         nodes = graphData[0];
                         edges = graphData[1];
 
+                        $rootScope.showMenu = true;
+
                     } else if (switchID === undefined) {
 
+                        $rootScope.showMenu = false;
+                        $location.url('home');
                         nodes.clear();
                         edges.clear();
                         $interval.cancel(graphUpdate);
@@ -124,7 +128,7 @@ angular.module('graph.controller', ['ngVis'])
         };
 
         $scope.$on('$destroy', function () {
-            $interval.cancel(graphUpdate);
+            $interval.cancel($scope.graphUpdate);
             $interval.cancel(checkSwitchID);
         });
     });
