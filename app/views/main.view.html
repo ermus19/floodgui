@@ -175,12 +175,12 @@
                         <td>{{port.rx_speed}}</td>
                         <td>{{port.status}}</td>
                         <td ng-if="(port.status == 'enabled' && port.port_number != 'local')">
-                            <button id="disablePortButton" type="button" ng-click="disablePort(port.port_number)" class="btn">
+                            <button id="disablePortButton" type="button" ng-click="disablePort(port.port_number)" class="btn port-action">
                                 Disable Port
                             </button>
                         </td>
                         <td ng-if="(port.status == 'disabled' && port.port_number != 'local')">
-                            <button id="enablePortButton" type="button" ng-click="enablePort(port.port_number)" class="btn">
+                            <button id="enablePortButton" type="button" ng-click="enablePort(port.port_number)" class="btn port-action">
                                 Enable Port
                             </button>
                         </td>

@@ -118,6 +118,12 @@ input.ng-valid{
   margin: 5px;
 }
 
+.btn.port-action {
+    font-size: 17px;
+    margin: 2px;
+}
+
+
 th {
   text-align: center;
   font-size: 17px;
@@ -126,7 +132,7 @@ th {
 }
 
 .table {
-  margin-top: 24px;
+  margin-top: 32px;
   margin-left:auto; 
   margin-right:auto;
   width: 95%;

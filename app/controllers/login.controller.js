@@ -35,7 +35,7 @@ angular.module('login.controller', [])
 
             $timeout(function () {
 
-                if (!checkConnection('localhost')) {
+                if (!$scope.checkConnection('localhost')) {
 
                     $scope.showLoading = false;
                     $scope.thisClicked = false;
@@ -63,12 +63,12 @@ angular.module('login.controller', [])
         $scope.onClickPrev = function () {
 
             $scope.showLoadingPrev = true;
-            $timeout(checkConnection(location), 1800);
+            $timeout($scope.checkConnection(location), 1800);
 
         };
 
 
-        var checkConnection = function (location) {
+        $scope.checkConnection = function (location) {
 
             Test('http://' + location + ':8080/wm/core/memory/json').query().$promise.then(function (data) {
 
