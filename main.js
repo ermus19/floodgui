@@ -23,6 +23,7 @@ function createWindow() {
     height: config.get('height'),
     minWidth: 1023,
     minHeight: 700,
+    icon: __dirname + './app/assets/icons/app.icns',
     show: false
   });
 
