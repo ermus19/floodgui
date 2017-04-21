@@ -40,8 +40,13 @@ angular.module('utils.service', [])
 
                     state = 'list-group-item list-group-item-warning';
 
-                } else {
+                } else if (isNaN(value)){
 
+                    value = '-';
+                    state = '';
+
+                } else {
+                    
                     state = 'list-group-item list-group-item-danger';
 
                 }
