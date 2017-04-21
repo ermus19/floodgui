@@ -93,6 +93,7 @@ describe('Login Controller:', function () {
     $timeout.flush();
     assert(windowAlertSpy.calledOnce);
     assert(windowAlertSpy.calledWith("Can't connect to localhost"));
+    windowAlertSpy.restore();
     expect($scope.showLoading).to.be.false;
     expect($scope.thisClicked).to.be.false;
   });
@@ -123,6 +124,25 @@ describe('Login Controller:', function () {
     var locationSpy = sinon.spy($location, 'path');
     $scope.onClickPrev();
     expect($scope.showLoadingPrev).to.be.true;
+  });
+
+  it('Should test the location of controller', function () {
+    var $scope = {};
+    var location = 'localhost';
+    var controller = $controller('login.controller', { $scope: $scope });
+    var configSpy = sinon.spy(storageService, "setSafe");
+    var configSpyLocation = sinon.spy(storageService, "setLocation");
+    var locationSpy = sinon.spy($location, 'path');
+    $httpBackend.when('GET', "http://localhost:8080/wm/core/memory/json").respond({
+      "total": 264765440,
+      "free": 231007368
+    });
+    $scope.checkConnection(location);
+    $httpBackend.flush();
+    assert(configSpy.calledWith(true));
+    assert(configSpyLocation.calledWith(location));
+    assert(locationSpy.calledWith('/home'));
+
   });
 
 });
