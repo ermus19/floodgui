@@ -4,8 +4,6 @@ angular.module('utils.service', [])
 
     .factory('utilsService', [function () {
 
-        var devices = [];
-
         return {
             convertTime: function (uptime) {
                 var seconds = (uptime / 1000) % 60;
@@ -15,15 +13,15 @@ angular.module('utils.service', [])
 
                 if ((hours | 0) > 0) {
 
-                    time = (hours | 0) + "h " + (minutes | 0) + "m " + (seconds | 0) + "s ";
+                    time = (hours | 0) + "h " + (minutes | 0) + "m " + (seconds | 0) + "s";
 
                 } else if ((minutes | 0) > 0) {
 
-                    time = (minutes | 0) + "m " + (seconds | 0) + "s ";
+                    time = (minutes | 0) + "m " + (seconds | 0) + "s";
 
                 } else {
 
-                    time = (seconds | 0) + "s ";
+                    time = (seconds | 0) + "s";
 
                 }
                 return time;
