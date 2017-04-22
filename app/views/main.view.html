@@ -1,0 +1,204 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand mb-0">FloodGUI</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li ng-class="{ active: showHome}"><a href="" ng-click="changeView('home')">Home</a></li>
+            <li ng-class="{ active: showDevices}" ng-show="$root.showMenu"><a href="" ng-click="changeView('devices')">Devices</a></li>
+            <li ng-class="{ active: showPorts}" ng-show="$root.showMenu"><a href="" ng-click="changeView('ports')">Ports</a></li>
+            <li ng-class="{ active: showAbout}"><a href="" ng-click="showAboutInfo()">About</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div id="home" ng-show="showHome">
+    <div ng-controller="graph.controller">
+        <div id="networkTopology">
+            <vis-network data="graphData" options="graphOptions" events="graphEvents"></vis-network>
+            <button id="restore" type="button" ng-click="graphFit()" class="btn btn-info" ng-disabled="btnDisabled">
+                <span ng-hide="showLoading">
+                Restore Graph!
+                </span>
+                <span ng-show="showLoading">
+                Loading...
+            <i class="fa fa-spinner fa-spin"></i>
+            </button>
+        </div>
+    </div>
+    <div ng-controller="stats.controller">
+        <ul class="list-group">
+            <li class="list-group-item active">
+                Floodlight Controller info:
+            </li>
+            <li class="list-group-item">
+                <span ng-show="showUptime">
+                    Uptime: {{uptime}} 
+                </span>
+                <span ng-hide="showUptime">
+                    Uptime:
+                <i class="fa fa-gear fa-spin"></i>
+                </span>
+            </li>
+            <li class="list-group-item">
+                <span ng-show="showVersion">
+                    Controller version: {{version}}
+                </span>
+                <span ng-hide="showVersion">
+                    Controller version:
+                <i class="fa fa-gear fa-spin"></i>
+                </span>
+            </li>
+            <li class="list-group-item">
+                <span ng-show="showFirewallStatus">
+                    Firewall status: {{firewallStatus}}
+                </span>
+                <span ng-hide="showFirewallStatus">
+                    Firewall status:
+                <i class="fa fa-gear fa-spin"></i>
+                </span>
+            </li>
+        </ul>
+        <ul class="list-group">
+            <li class="list-group-item active">Floodlight Controller status:</li>
+            <li ng-class="memoryState">
+                <span ng-show="showMemory">
+                    Memory: {{memory}}
+                </span>
+                <span ng-hide="showMemory">
+                    Memory:
+                <i class="fa fa-gear fa-spin"></i>
+                </span>
+            </li>
+            <li ng-class="apiHealthState">
+                <span ng-show="showApiHealth">
+                    API Health: {{apiHealth}}
+                </span>
+                <span ng-hide="showApiHealth">
+                    API Health:
+                <i class="fa fa-gear fa-spin"></i>
+                </span>
+            </li>
+        </ul>
+        <div ng-hide="showSwitch">
+            <ul class="list-group">
+                <li class="list-group-item active">Topology info:</li>
+                <li class="list-group-item">
+                    FloodGUI didn't find any switch attached to the controller yet: the Switch stats and the network topology will only be shown
+                    if a switch is attached to the controller!
+                </li>
+            </ul>
+        </div>
+        <div ng-show="showSwitch">
+            <ul class="list-group">
+                <li class="list-group-item active">Switch stats:</li>
+                <li class="list-group-item">
+                    <span ng-show="showOFversion">
+                    OpenFlow version: {{OFVersion}}
+                </span>
+                    <span ng-hide="showOFversion">
+                    OpenFlow version:
+                <i class="fa fa-gear fa-spin"></i>
+                </span>
+                </li>
+                <li class="list-group-item">
+                    <span ng-show="showHostsCount">
+                    Connected hosts: {{hosts}}
+                </span>
+                    <span ng-hide="showHostsCount">
+                    Connected hosts:
+                <i class="fa fa-gear fa-spin"></i>
+                </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="devices" ng-show="showDevices">
+    <div ng-controller="devices.controller">
+        <div ng-show="showDevicesList">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>DHCP Name</th>
+                        <th>IPv4</th>
+                        <th>IPv6</th>
+                        <th>MAC</th>
+                        <th>Port</th>
+                        <th>Last Seen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="device in devices">
+                        <td>{{device.dhcpName}}</td>
+                        <td>{{device.ipv4}}</td>
+                        <td>{{device.ipv6}}</td>
+                        <td>{{device.mac}}</td>
+                        <td>{{device.port}}</td>
+                        <td>{{device.lastSeen}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-show="showEmptyDevices">
+            <p class="empty-devices-message">
+                FloodGUI couldn't find any device attached to the switch connected to the controller!
+            </p>
+        </div>
+        <div ng-show="showDevicesLoading">
+            <p> Devices info loading...</p>
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+        </div>
+    </div>
+</div>
+<div id="ports" ng-show="showPorts">
+    <div ng-controller="ports.controller">
+        <div ng-show="showPortsList">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Port Number</th>
+                        <th>Name</th>
+                        <th>Max speed</th>
+                        <th>Transmission Bandwidth</th>
+                        <th>Reception Bandwidth</th>
+                        <th>Port Status</th>
+                        <th>Port actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="port in ports">
+                        <td>{{port.port_number}}</td>
+                        <td>{{port.name}}</td>
+                        <td>{{port.max_speed}}</td>
+                        <td>{{port.tx_speed}}</td>
+                        <td>{{port.rx_speed}}</td>
+                        <td>{{port.status}}</td>
+                        <td ng-if="(port.status == 'enabled' && port.port_number != 'local')">
+                            <button id="disablePortButton" type="button" ng-click="disablePort(port.port_number)" class="btn port-action">
+                                Disable Port
+                            </button>
+                        </td>
+                        <td ng-if="(port.status == 'disabled' && port.port_number != 'local')">
+                            <button id="enablePortButton" type="button" ng-click="enablePort(port.port_number)" class="btn port-action">
+                                Enable Port
+                            </button>
+                        </td>
+                        <td ng-if="port.port_number == 'local'">
+                            -
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-show="showEmptyDevices">
+            <p class="empty-devices-message">
+                FloodGUI couldn't find any device attached to the switch connected to the controller!
+            </p>
+        </div>
+        <div ng-show="showDevicesLoading">
+            <p> Devices info loading...</p>
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+{
+    "/wm/core/memory/json": "/memory",
+    "/wm/core/health/json": "/health",
+    "/wm/core/version/json": "/version",
+    "/wm/core/system/uptime/json": "/uptime",
+    "/wm/firewall/module/status/json": "/firewall",
+    "/wm/core/controller/summary/json": "/summary",
+    "/wm/core/controller/switches/json": "/switches",
+    "/wm/device/": "/devices",
+    "/wm/core/switch/all/port-desc/json": "/ports",
+    "/wm/statistics/bandwidth/00:00:00:e0:4c:53:44:58/all/json": "/portbw",
+    "/wm/portblocker/list/json": "/portsStatus"
+}

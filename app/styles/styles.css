@@ -1,0 +1,179 @@
+@font-face {
+  font-family: 'Open Sans';
+  font-weight: 400;
+  font-style: normal;
+  src: url('../assets/fonts/Open-Sans-regular.woff2') format('woff2');
+}
+
+body {
+  background-color: #999999;
+  font-family: 'Open Sans';
+  color: white;
+}
+
+.form {
+  margin-top: 150px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.previous {
+  margin-top: 150px;
+  text-align: center;
+  font-size: 18px;
+}
+
+#buttons {
+  text-align: center;
+  font-size: 18px;
+}
+
+.previous p {
+  text-align: center;
+  font-size: 30px;
+}
+
+h1 {
+  margin-top: 150px;
+  text-align: center;
+  font-size: 60px;
+}
+
+.previous h1 {
+  margin-top: 150px;
+  text-align: center;
+  font-size: 60px;
+}
+
+.previous {
+  display: inline;
+}
+
+.empty-devices-message {
+  margin-top: 150px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 18px;
+}
+
+input{
+  color: black;
+  background-color: white;
+  padding: 3px;
+}
+
+input.ng-dirty.ng-invalid{
+  border: 2px solid #ff8080;
+  background-color: #ff8080; 
+}
+
+input.ng-invalid:focus{
+  border: 2px solid cornflowerblue;
+  background-color: white;
+}
+
+input.ng-valid{
+  border: 2px solid #80ff80;
+  background-color: #80ff80;
+}
+
+#home .list-group{
+  width: 35%;
+  float: left;
+  margin-top: 22px;
+  margin-right: 5px;
+  margin-left: 15px;
+}
+
+.list-group-item {
+  background-color: #f2f2f2;
+  font-size: 17px;
+  font-weight: 900;
+  color: black;
+  text-align: center;
+  border: 1.5px solid black;
+}
+
+.list-group-item-success {
+  background-color: #99ff99;
+}
+
+.list-group-item-warning {
+  background-color: #ffe066;
+}
+
+.list-group-item-danger {
+  background-color: #ff4d4d;
+}
+
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+  color: white;
+  background-color: black;
+  border-color: black;
+}
+
+.btn {
+  font-size: 18px;
+  margin: 5px;
+}
+
+.btn.port-action {
+    font-size: 17px;
+    margin: 2px;
+}
+
+
+th {
+  text-align: center;
+  font-size: 17px;
+  font-weight: 900;
+  background-color: #000000;
+}
+
+.table {
+  margin-top: 32px;
+  margin-left:auto; 
+  margin-right:auto;
+  width: 95%;
+}
+
+table, td, th{
+  border: 1.5px solid black;
+}
+
+td {
+  border: 1.5px solid black;
+  font-size: 17px;
+  text-align: center;
+  background-color: #f2f2f2;
+  color: #000000;
+} 
+
+label.example{
+  font-size: 12px;
+  display: block;
+}
+
+p.note{
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+#restore {
+  font-size: 12px;
+  position: fixed;
+  top: 90px;
+  right: 18px;
+}
+
+div.vis-network {
+  float: right;
+  border:2px solid black;
+  border-radius: 10px;
+  background-color: #f2f2f2;
+  margin-top: 20px;
+  margin-right: 20px;
+  margin-left: 10px;
+}
