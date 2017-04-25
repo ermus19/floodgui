@@ -1,0 +1,553 @@
+{
+    "memory": {
+        "total": 264765440,
+        "free": 231007368
+    },
+    "health": {
+        "healthy": true
+    },
+    "version": {
+        "name": "floodlight",
+        "version": "1.2-SNAPSHOT"
+    },
+    "uptime": {
+        "systemUptimeMsec": 269760
+    },
+    "firewall": {
+        "result": "firewall disabled"
+    },
+    "summary": {
+        "# Switches": 1,
+        "# inter-switch links": 0,
+        "# quarantine ports": 0,
+        "# hosts": 5
+    },
+    "switches": [
+        {
+            "inetAddress": "/192.168.1.17:54924",
+            "connectedSince": 1491560615975,
+            "switchDPID": "00:00:00:e0:4c:53:44:58",
+            "openFlowVersion": "OF_13"
+        }
+    ],
+    "portbw": [
+        {
+            "dpid": "00:00:00:e0:4c:53:44:58",
+            "port": "6",
+            "updated": "Mon Apr 17 20:13:13 CEST 2017",
+            "link-speed-bits-per-second": "0",
+            "bits-per-second-rx": "0",
+            "bits-per-second-tx": "465"
+        },
+        {
+            "dpid": "00:00:00:e0:4c:53:44:58",
+            "port": "5",
+            "updated": "Mon Apr 17 20:13:13 CEST 2017",
+            "link-speed-bits-per-second": "100000",
+            "bits-per-second-rx": "0",
+            "bits-per-second-tx": "0"
+        },
+        {
+            "dpid": "00:00:00:e0:4c:53:44:58",
+            "port": "2",
+            "updated": "Mon Apr 17 20:13:13 CEST 2017",
+            "link-speed-bits-per-second": "100000",
+            "bits-per-second-rx": "0",
+            "bits-per-second-tx": "0"
+        },
+        {
+            "dpid": "00:00:00:e0:4c:53:44:58",
+            "port": "1",
+            "updated": "Mon Apr 17 20:13:13 CEST 2017",
+            "link-speed-bits-per-second": "100000",
+            "bits-per-second-rx": "1398",
+            "bits-per-second-tx": "2635"
+        },
+        {
+            "dpid": "00:00:00:e0:4c:53:44:58",
+            "port": "4",
+            "updated": "Mon Apr 17 20:13:13 CEST 2017",
+            "link-speed-bits-per-second": "100000",
+            "bits-per-second-rx": "0",
+            "bits-per-second-tx": "0"
+        },
+        {
+            "dpid": "00:00:00:e0:4c:53:44:58",
+            "port": "3",
+            "updated": "Mon Apr 17 20:13:13 CEST 2017",
+            "link-speed-bits-per-second": "100000",
+            "bits-per-second-rx": "0",
+            "bits-per-second-tx": "0"
+        },
+        {
+            "dpid": "00:00:00:e0:4c:53:44:58",
+            "port": "local",
+            "updated": "Mon Apr 17 20:13:13 CEST 2017",
+            "link-speed-bits-per-second": "0",
+            "bits-per-second-rx": "1398",
+            "bits-per-second-tx": "2500"
+        }
+    ],
+    "ports": {
+        "00:00:00:e0:4c:53:44:58": {
+            "version": "OF_13",
+            "port_desc": [
+                {
+                    "port_number": "4",
+                    "hardware_address": "00:00:00:00:00:00",
+                    "name": "eth3",
+                    "config": [],
+                    "state": [
+                        "LINK_DOWN"
+                    ],
+                    "current_features": [
+                        "PF_100MB_FD",
+                        "PF_AUTONEG"
+                    ],
+                    "advertised_features": [
+                        "PF_10MB_HD",
+                        "PF_10MB_FD",
+                        "PF_100MB_HD",
+                        "PF_100MB_FD",
+                        "PF_COPPER",
+                        "PF_AUTONEG",
+                        "PF_PAUSE",
+                        "PF_PAUSE_ASYM"
+                    ],
+                    "supported_features": [
+                        "PF_10MB_HD",
+                        "PF_10MB_FD",
+                        "PF_100MB_HD",
+                        "PF_100MB_FD",
+                        "PF_COPPER",
+                        "PF_AUTONEG"
+                    ],
+                    "peer_features": [],
+                    "curr_speed": "100000",
+                    "max_speed": "100000"
+                },
+                {
+                    "port_number": "1",
+                    "hardware_address": "00:00:00:00:00:00",
+                    "name": "eth0",
+                    "config": [],
+                    "state": [],
+                    "current_features": [
+                        "PF_100MB_FD",
+                        "PF_AUTONEG"
+                    ],
+                    "advertised_features": [
+                        "PF_10MB_HD",
+                        "PF_10MB_FD",
+                        "PF_100MB_HD",
+                        "PF_100MB_FD",
+                        "PF_COPPER",
+                        "PF_AUTONEG",
+                        "PF_PAUSE",
+                        "PF_PAUSE_ASYM"
+                    ],
+                    "supported_features": [
+                        "PF_10MB_HD",
+                        "PF_10MB_FD",
+                        "PF_100MB_HD",
+                        "PF_100MB_FD",
+                        "PF_COPPER",
+                        "PF_AUTONEG"
+                    ],
+                    "peer_features": [],
+                    "curr_speed": "100000",
+                    "max_speed": "100000"
+                },
+                {
+                    "port_number": "local",
+                    "hardware_address": "00:00:00:00:00:00",
+                    "name": "br0",
+                    "config": [],
+                    "state": [],
+                    "current_features": [],
+                    "advertised_features": [],
+                    "supported_features": [],
+                    "peer_features": [],
+                    "curr_speed": "0",
+                    "max_speed": "0"
+                },
+                {
+                    "port_number": "6",
+                    "hardware_address": "00:00:00:00:00:00",
+                    "name": "wlan0",
+                    "config": [],
+                    "state": [],
+                    "current_features": [],
+                    "advertised_features": [],
+                    "supported_features": [],
+                    "peer_features": [],
+                    "curr_speed": "0",
+                    "max_speed": "0"
+                },
+                {
+                    "port_number": "2",
+                    "hardware_address": "00:00:00:00:00:00",
+                    "name": "eth1",
+                    "config": [],
+                    "state": [
+                        "LINK_DOWN"
+                    ],
+                    "current_features": [
+                        "PF_100MB_FD",
+                        "PF_AUTONEG"
+                    ],
+                    "advertised_features": [
+                        "PF_10MB_HD",
+                        "PF_10MB_FD",
+                        "PF_100MB_HD",
+                        "PF_100MB_FD",
+                        "PF_COPPER",
+                        "PF_AUTONEG",
+                        "PF_PAUSE",
+                        "PF_PAUSE_ASYM"
+                    ],
+                    "supported_features": [
+                        "PF_10MB_HD",
+                        "PF_10MB_FD",
+                        "PF_100MB_HD",
+                        "PF_100MB_FD",
+                        "PF_COPPER",
+                        "PF_AUTONEG"
+                    ],
+                    "peer_features": [],
+                    "curr_speed": "100000",
+                    "max_speed": "100000"
+                },
+                {
+                    "port_number": "5",
+                    "hardware_address": "00:00:00:00:00:00",
+                    "name": "eth4",
+                    "config": [],
+                    "state": [
+                        "LINK_DOWN"
+                    ],
+                    "current_features": [
+                        "PF_100MB_FD",
+                        "PF_AUTONEG"
+                    ],
+                    "advertised_features": [
+                        "PF_10MB_HD",
+                        "PF_10MB_FD",
+                        "PF_100MB_HD",
+                        "PF_100MB_FD",
+                        "PF_COPPER",
+                        "PF_AUTONEG",
+                        "PF_PAUSE",
+                        "PF_PAUSE_ASYM"
+                    ],
+                    "supported_features": [
+                        "PF_10MB_HD",
+                        "PF_10MB_FD",
+                        "PF_100MB_HD",
+                        "PF_100MB_FD",
+                        "PF_COPPER",
+                        "PF_AUTONEG"
+                    ],
+                    "peer_features": [],
+                    "curr_speed": "100000",
+                    "max_speed": "100000"
+                },
+                {
+                    "port_number": "3",
+                    "hardware_address": "00:00:00:00:00:00",
+                    "name": "eth2",
+                    "config": [],
+                    "state": [
+                        "LINK_DOWN"
+                    ],
+                    "current_features": [
+                        "PF_100MB_FD",
+                        "PF_AUTONEG"
+                    ],
+                    "advertised_features": [
+                        "PF_10MB_HD",
+                        "PF_10MB_FD",
+                        "PF_100MB_HD",
+                        "PF_100MB_FD",
+                        "PF_COPPER",
+                        "PF_AUTONEG",
+                        "PF_PAUSE",
+                        "PF_PAUSE_ASYM"
+                    ],
+                    "supported_features": [
+                        "PF_10MB_HD",
+                        "PF_10MB_FD",
+                        "PF_100MB_HD",
+                        "PF_100MB_FD",
+                        "PF_COPPER",
+                        "PF_AUTONEG"
+                    ],
+                    "peer_features": [],
+                    "curr_speed": "100000",
+                    "max_speed": "100000"
+                }
+            ]
+        }
+    },
+    "devices": {
+        "devices": [
+            {
+                "entityClass": "DefaultEntityClass",
+                "mac": [
+                    "00:00:00:00:00:00"
+                ],
+                "ipv4": [],
+                "ipv6": [],
+                "vlan": [
+                    "0x0"
+                ],
+                "attachmentPoint": [
+                    {
+                        "switch": "00:00:00:e0:4c:53:44:58",
+                        "port": "6"
+                    }
+                ],
+                "lastSeen": 1491561241781
+            },
+            {
+                "entityClass": "DefaultEntityClass",
+                "mac": [
+                    "00:00:00:00:00:00"
+                ],
+                "ipv4": [],
+                "ipv6": [
+                    "fe80::1481:4896:8119:e9a"
+                ],
+                "vlan": [
+                    "0x0"
+                ],
+                "attachmentPoint": [
+                    {
+                        "switch": "00:00:00:e0:4c:53:44:58",
+                        "port": "1"
+                    }
+                ],
+                "lastSeen": 1491561218697
+            },
+            {
+                "entityClass": "DefaultEntityClass",
+                "mac": [
+                    "00:00:00:00:00:00"
+                ],
+                "ipv4": [
+                    "192.168.1.17"
+                ],
+                "ipv6": [],
+                "vlan": [
+                    "0x0"
+                ],
+                "attachmentPoint": [
+                    {
+                        "switch": "00:00:00:e0:4c:53:44:58",
+                        "port": "local"
+                    }
+                ],
+                "lastSeen": 1491561221333
+            },
+            {
+                "entityClass": "DefaultEntityClass",
+                "mac": [
+                    "00:00:00:00:00:00"
+                ],
+                "ipv4": [
+                    "192.168.1.1"
+                ],
+                "ipv6": [
+                    "fe80::fa8e:85ff:fe41:dcea"
+                ],
+                "vlan": [
+                    "0x0"
+                ],
+                "attachmentPoint": [
+                    {
+                        "switch": "00:00:00:e0:4c:53:44:58",
+                        "port": "1"
+                    }
+                ],
+                "lastSeen": 1491561241220
+            },
+            {
+                "entityClass": "DefaultEntityClass",
+                "mac": [
+                    "00:00:00:00:00:00"
+                ],
+                "ipv4": [],
+                "ipv6": [],
+                "vlan": [
+                    "0x0"
+                ],
+                "attachmentPoint": [
+                    {
+                        "switch": "00:00:00:e0:4c:53:44:58",
+                        "port": "1"
+                    }
+                ],
+                "lastSeen": 1491561231104
+            },
+            {
+                "entityClass": "DefaultEntityClass",
+                "mac": [
+                    "00:00:00:00:00:00"
+                ],
+                "ipv4": [
+                    "192.168.1.11"
+                ],
+                "ipv6": [
+                    "fe80::c5e:ed7b:46da:acd8"
+                ],
+                "vlan": [
+                    "0x0"
+                ],
+                "attachmentPoint": [
+                    {
+                        "switch": "00:00:00:e0:4c:53:44:58",
+                        "port": "6"
+                    }
+                ],
+                "lastSeen": 1491561210460,
+                "dhcpClientName": "iPhone"
+            },
+            {
+                "entityClass": "DefaultEntityClass",
+                "mac": [
+                    "00:00:00:00:00:00"
+                ],
+                "ipv4": [
+                    "192.168.1.15"
+                ],
+                "ipv6": [],
+                "vlan": [
+                    "0x0"
+                ],
+                "attachmentPoint": [
+                    {
+                        "switch": "00:00:00:e0:4c:53:44:58",
+                        "port": "1"
+                    }
+                ],
+                "lastSeen": 1491560737166,
+                "dhcpClientName": "Nintendo 3DS"
+            },
+            {
+                "entityClass": "DefaultEntityClass",
+                "mac": [
+                    "00:00:00:00:00:00"
+                ],
+                "ipv4": [
+                    "192.168.1.12"
+                ],
+                "ipv6": [
+                    "fe80::c2ee:fbff:fedc:8d42"
+                ],
+                "vlan": [
+                    "0x0"
+                ],
+                "attachmentPoint": [
+                    {
+                        "switch": "00:00:00:e0:4c:53:44:58",
+                        "port": "6"
+                    }
+                ],
+                "lastSeen": 1491561218139,
+                "dhcpClientName": "android"
+            },
+            {
+                "entityClass": "DefaultEntityClass",
+                "mac": [
+                    "00:00:00:00:00:00"
+                ],
+                "ipv4": [
+                    "192.168.1.16"
+                ],
+                "ipv6": [
+                    "fe80::da50:e6ff:fe8b:b7af"
+                ],
+                "vlan": [
+                    "0x0"
+                ],
+                "attachmentPoint": [
+                    {
+                        "switch": "00:00:00:e0:4c:53:44:58",
+                        "port": "6"
+                    }
+                ],
+                "lastSeen": 1491561203327,
+                "dhcpClientName": "android"
+            },
+            {
+                "entityClass": "DefaultEntityClass",
+                "mac": [
+                    "00:00:00:00:00:00"
+                ],
+                "ipv4": [
+                    "192.168.1.49"
+                ],
+                "ipv6": [
+                    "fe80::16da:e9ff:feca:9af9"
+                ],
+                "vlan": [
+                    "0x0"
+                ],
+                "attachmentPoint": [
+                    {
+                        "switch": "00:00:00:e0:4c:53:44:58",
+                        "port": "5"
+                    }
+                ],
+                "lastSeen": 1491561161461,
+                "dhcpClientName": "debian"
+            },
+            {
+                "entityClass": "DefaultEntityClass",
+                "mac": [
+                    "00:00:00:00:00:00"
+                ],
+                "ipv4": [
+                    "192.168.1.22"
+                ],
+                "ipv6": [
+                    "fe80::6ac4:4dff:fe9e:492c"
+                ],
+                "vlan": [
+                    "0x0"
+                ],
+                "attachmentPoint": [
+                    {
+                        "switch": "00:00:00:e0:4c:53:44:58",
+                        "port": "1"
+                    }
+                ],
+                "lastSeen": 1491561052170
+            }
+        ]
+    },
+    "portsStatus": {
+        "00:00:00:e0:4c:53:44:58": [
+            {
+                "port": "1",
+                "status": "enabled"
+            },
+            {
+                "port": "3",
+                "status": "enabled"
+            },
+            {
+                "port": "4",
+                "status": "enabled"
+            },
+            {
+                "port": "5",
+                "status": "enabled"
+            },
+            {
+                "port": "6",
+                "status": "disabled"
+            }
+        ]
+    }
+}
