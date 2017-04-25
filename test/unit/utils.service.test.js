@@ -50,11 +50,11 @@ describe('Utils Service:', function () {
         expect(utilsService.memorySet(0, 0)).to.include.keys('value', 'state');
         expect(utilsService.memorySet(0, 0)).to.be.deep.equal({ value: '-', state: '' });
     });
-    
+
     it('Expect memorySet(231007368, 264765440) to return object with correct values', function () {
         expect(typeof utilsService.memorySet(231007368, 264765440)).to.be.equal('object');
         expect(utilsService.memorySet(231007368, 264765440)).to.include.keys('value', 'state');
-        expect(utilsService.memorySet(231007368, 264765440)).to.be.deep.equal({ value:12.750180688234839, state: 'list-group-item list-group-item-success' });
+        expect(utilsService.memorySet(231007368, 264765440)).to.be.deep.equal({ value: 12.750180688234839, state: 'list-group-item list-group-item-success' });
     });
 
     it('Expect memorySet(0, 0) to return object with correct values', function () {
@@ -63,6 +63,9 @@ describe('Utils Service:', function () {
         expect(utilsService.memorySet(0, 0)).to.be.deep.equal({ value: '-', state: '' });
     });
 
-
-
+    it('Expect memorySet((231007368, 264765440) to return object with correct values', function () {
+        expect(typeof utilsService.memorySet(0, 0)).to.be.equal('object');
+        expect(utilsService.memorySet(0, 0)).to.include.keys('value', 'state');
+        expect(utilsService.memorySet(0, 0)).to.be.deep.equal({ value: '-', state: '' });
+    });
 });
