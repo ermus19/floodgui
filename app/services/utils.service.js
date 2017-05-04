@@ -40,13 +40,13 @@ angular.module('utils.service', [])
 
                     state = 'list-group-item list-group-item-warning';
 
-                } else if (isNaN(value)){
+                } else if (isNaN(value)) {
 
                     value = '-';
                     state = '';
 
                 } else {
-                    
+
                     state = 'list-group-item list-group-item-danger';
 
                 }
@@ -60,22 +60,26 @@ angular.module('utils.service', [])
 
                 var convertedBw;
 
-                if (bw < 1000) {
+                if (bw === 0) {
+
+                    return '-';
+
+                } else if (bw < 1000) {
 
                     convertedBw = bw;
                     return convertedBw + ' bit/s';
 
                 }
                 else if (bw < 1000000) {
+
                     convertedBw = bw / 1000;
                     return convertedBw.toFixed(2) + ' kbit/s';
-                } else if (bw === 0) {
-
-                    return '-';
 
                 } else {
+
                     convertedBw = bw / 1000000;
                     return convertedBw.toFixed(2) + ' Mbit/s';
+
                 }
             }
         }
