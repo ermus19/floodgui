@@ -1,7 +1,7 @@
 {
   "name": "floodgui",
   "productName": "FloodGUI",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Floodlight GUI using electron framework",
   "main": "main.js",
   "scripts": {

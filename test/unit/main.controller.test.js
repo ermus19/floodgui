@@ -3,7 +3,6 @@
 describe('Main Controller:', function () {
 
   var $controller;
-  var $httpBackend;
   var $rootScope;
   var $window;
   var storageService;
@@ -14,9 +13,8 @@ describe('Main Controller:', function () {
     module('storage.service');
   });
 
-  beforeEach(inject(function (_$controller_, _$httpBackend_, _$rootScope_, _$window_, _storageService_) {
+  beforeEach(inject(function (_$controller_, _$rootScope_, _$window_, _storageService_) {
     $controller = _$controller_;
-    $httpBackend = _$httpBackend_;
     $rootScope = _$rootScope_;
     $window = _$window_;
     storageService = _storageService_;
