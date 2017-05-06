@@ -58,13 +58,101 @@ describe('Devices Service:', function () {
     });
 
     it('Expects devices and port count to be empty if data is empty', function () {
-        var data = { devices: [] };
+        var data = { "devices": [] };
         expect(devicesService.updateDevices(data)).to.be.empty;
         expect(devicesService.getPortCount()).to.be.empty;
         expect(devicesService.getPorts()).to.be.equal(0);
     });
 
-    it('Expects devices and port count to be filled with sample data', function () {
+    it('Expects devices list to contain one device with default fields', function () {
+        var data = {
+            "devices": [
+                {
+                    "mac": [],
+                    "ipv4": [],
+                    "ipv6": [],
+                    "attachmentPoint": []
+                }
+            ]
+        };
+        expect(devicesService.updateDevices(data)).to.not.be.empty;
+        expect(devicesService.updateDevices(data)).to.be.lengthOf(1);
+        expect(devicesService.updateDevices(data)).to.be.deep.equal([
+            {
+                "id": 0, 
+                "mac": "-", 
+                "switch": "-", 
+                "port": "-", 
+                "ipv4": "-", 
+                "ipv6": "-", 
+                "dhcpName": "-", 
+                "lastSeen": "-"
+            }
+        ]);
+    });
+
+    it('Expects devices list to contain one device with default fields', function () {
+        var data = {
+            "devices": [
+                {
+                    "mac": [],
+                    "ipv4": [],
+                    "ipv6": [],
+                    "attachmentPoint": []
+                }
+            ]
+        };
+        expect(devicesService.updateDevices(data)).to.not.be.empty;
+        expect(devicesService.updateDevices(data)).to.be.lengthOf(1);
+        expect(devicesService.updateDevices(data)).to.be.deep.equal([
+            {
+                "id": 0, 
+                "mac": "-", 
+                "switch": "-", 
+                "port": "-", 
+                "ipv4": "-", 
+                "ipv6": "-", 
+                "dhcpName": "-", 
+                "lastSeen": "-"
+            }
+        ]);
+    });
+
+    it('Expect devices list to contain one device with custom data', function () {
+        var data = {
+            "devices": [
+                {
+                    "mac": ["00:00:00:00:00:00"],
+                    "ipv4": ["192.168.1.17"],
+                    "ipv6": ["fe80::1481:4896:8119:e9a"],
+                    "attachmentPoint": [
+                        {
+                            "switch": "00:00:00:e0:4c:53:44:58",
+                            "port": "6"
+                        }],
+                    "lastSeen": 1491561241781,
+                    "dhcpClientName": "iPhone"
+                }
+            ]
+        };
+        expect(devicesService.updateDevices(data)).to.not.be.empty;
+        expect(devicesService.updateDevices(data)).to.be.lengthOf(1);
+        expect(devicesService.getPorts()).to.be.equal(6);
+        expect(devicesService.updateDevices(data)).to.be.deep.equal([
+            {
+                "id": 0, 
+                "mac": "00:00:00:00:00:00", 
+                "switch": "00:00:00:e0:4c:53:44:58", 
+                "port": "6", 
+                "ipv4": "192.168.1.17", 
+                "ipv6": "fe80::1481:4896:8119:e9a", 
+                "dhcpName": "iPhone", 
+                "lastSeen": "10h 34m 1s"
+            }
+        ]);
+    });
+
+    it('Expects devices and port count to be filled with sample data from Floodlight', function () {
         var data = {
             "devices": [
                 {
@@ -157,4 +245,5 @@ describe('Devices Service:', function () {
         expect(devicesService.getPortCount()).to.be.deep.equal([1, 0, 0, 0, 0, 2]);
         expect(devicesService.getPorts()).to.be.equal(6);
     });
+
 });

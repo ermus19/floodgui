@@ -36,11 +36,6 @@ angular.module('devices.service', [])
 
         function _updateDevices(data) {
 
-            if(data.devices.length === 0){
-                devices = []; 
-                return  devices;
-            }
-
             devices = [];
 
             for (var i = 0; i < data.devices.length; i++) {

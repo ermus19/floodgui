@@ -50,11 +50,11 @@ describe('Utils Service:', function () {
         expect(utilsService.memorySet(0, 0)).to.include.keys('value', 'state');
         expect(utilsService.memorySet(0, 0)).to.be.deep.equal({ value: '-', state: '' });
     });
-    
+
     it('Expect memorySet(231007368, 264765440) to return object with correct values', function () {
         expect(typeof utilsService.memorySet(231007368, 264765440)).to.be.equal('object');
         expect(utilsService.memorySet(231007368, 264765440)).to.include.keys('value', 'state');
-        expect(utilsService.memorySet(231007368, 264765440)).to.be.deep.equal({ value:12.750180688234839, state: 'list-group-item list-group-item-success' });
+        expect(utilsService.memorySet(231007368, 264765440)).to.be.deep.equal({ value: 12.750180688234839, state: 'list-group-item list-group-item-success' });
     });
 
     it('Expect memorySet(0, 0) to return object with correct values', function () {
@@ -63,6 +63,36 @@ describe('Utils Service:', function () {
         expect(utilsService.memorySet(0, 0)).to.be.deep.equal({ value: '-', state: '' });
     });
 
+    it('Expect memorySet((1000000, 264765440) to return object with correct values', function () {
+        expect(typeof utilsService.memorySet(1000000, 264765440)).to.be.equal('object');
+        expect(utilsService.memorySet(1000000, 264765440)).to.include.keys('value', 'state');
+        expect(utilsService.memorySet(1000000, 264765440)).to.be.deep.equal({ value: 99.622307201423267, state: 'list-group-item list-group-item-danger' });
+    });
 
+    it('Expect memorySet((100000000, 264765440) to return object with correct values', function () {
+        expect(typeof utilsService.memorySet(100000000, 264765440)).to.be.equal('object');
+        expect(utilsService.memorySet(100000000, 264765440)).to.include.keys('value', 'state');
+        expect(utilsService.memorySet(100000000, 264765440)).to.be.deep.equal({ value: 62.230720142326733, state: 'list-group-item list-group-item-warning' });
+    });
+
+    it('Expect convertBw(0) to return -', function () {
+        expect(typeof utilsService.convertBw(0)).to.be.equal('string');
+        expect(utilsService.convertBw(0)).to.be.equal('-');
+    });
+
+    it('Expect convertBw(54) to return 54 bit/s', function () {
+        expect(typeof utilsService.convertBw(54)).to.be.equal('string');
+        expect(utilsService.convertBw(54)).to.be.equal('54 bit/s');
+    });
+
+    it('Expect convertBw(5045) to return 5.04 Kbit/s', function () {
+        expect(typeof utilsService.convertBw(5045)).to.be.equal('string');
+        expect(utilsService.convertBw(5045)).to.be.equal('5.04 kbit/s');
+    });
+
+    it('Expect convertBw(5022344) to return 5.02 Mbit/s', function () {
+        expect(typeof utilsService.convertBw(5022344)).to.be.equal('string');
+        expect(utilsService.convertBw(5022344)).to.be.equal('5.02 Mbit/s');
+    });
 
 });
