@@ -6,14 +6,12 @@ angular.module('devices.controller', [])
 
         $scope.showEmptyDevices = false;
         $scope.showDevicesList = false;
-        $scope.showDevicesLoading = true;
 
         var updateDevices = $interval(function () {
 
             var devices = devicesService.getDevices();
-            $scope.showDevicesLoading = false;
 
-            if (devices.lenght === 0) {
+            if (devices.length === 0) {
 
                 $scope.showEmptyDevices = true;
 
@@ -27,7 +25,7 @@ angular.module('devices.controller', [])
 
             }
 
-        }, 10000);
+        }, 6000);
 
         $scope.$on('$destroy', function () {
             $interval.cancel(updateDevices);
