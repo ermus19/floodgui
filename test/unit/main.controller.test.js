@@ -91,7 +91,7 @@ describe('Main Controller:', function () {
     var windowAlertSpy = sinon.spy($window, 'alert');
     $scope.showAboutInfo();
     assert(windowAlertSpy.calledOnce);
-    assert(windowAlertSpy.calledWith("FloodGUI v1.0.0\n\nMore info at github.com/ermus19/floodgui\n\n@ermus19 2017"));
+    assert(windowAlertSpy.calledWith("FloodGUI v1.1.0\n\nMore info at github.com/ermus19/floodgui\n\n@ermus19 2017"));
     windowAlertSpy.restore();
   })
 

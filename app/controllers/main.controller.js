@@ -62,7 +62,7 @@ angular.module('main.controller', [])
 
         $scope.showAboutInfo = function () {
 
-            $window.alert("FloodGUI v1.0.0\n\nMore info at github.com/ermus19/floodgui\n\n@ermus19 2017");
+            $window.alert("FloodGUI v1.1.0\n\nMore info at github.com/ermus19/floodgui\n\n@ermus19 2017");
 
         }
 
