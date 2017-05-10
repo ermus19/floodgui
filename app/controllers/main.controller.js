@@ -12,7 +12,7 @@ angular.module('main.controller', [])
 
         $rootScope.showMenu = false;
 
-        var location = storageService.getLocation();
+        $scope.location = storageService.getLocation();
         storageService.setSafe(true);
 
         $scope.changeView = function (view) {
@@ -47,12 +47,12 @@ angular.module('main.controller', [])
 
         var conCheck = $interval(function () {
 
-            Test('http://' + location + ':8080/wm/core/memory/json').query().$promise.then(function (data) {
+            Test('http://' + $scope.location + ':8080/wm/core/memory/json').query().$promise.then(function (data) {
 
             }, function (response) {
 
                 storageService.setSafe(false);
-                $window.alert("Connection lost with " + location);
+                $window.alert("Connection lost with " + $scope.location);
                 $location.url('/login');
                 $interval.cancel(conCheck);
                 conCheck = undefined;
@@ -62,7 +62,7 @@ angular.module('main.controller', [])
 
         $scope.showAboutInfo = function () {
 
-            $window.alert("FloodGUI v1.0.0\n\nMore info at github.com/ermus19/floodgui\n\n@ermus19 2017");
+            $window.alert("FloodGUI v1.1.0\n\nMore info at github.com/ermus19/floodgui\n\n@ermus19 2017");
 
         }
 

@@ -13,7 +13,7 @@ angular.module('graph.controller', ['ngVis'])
 
         $scope.startCheckSwitchID = function () {
 
-            var checkSwitchID = $interval(function () {
+             $scope.checkSwitchID = $interval(function () {
 
                 var switchID = devicesService.getSwitchID();
 
@@ -30,7 +30,7 @@ angular.module('graph.controller', ['ngVis'])
                     });
 
                     $scope.startGraphUpdate();
-                    $interval.cancel(checkSwitchID);
+                    $interval.cancel($scope.checkSwitchID);
 
                 } 
             });
@@ -129,6 +129,6 @@ angular.module('graph.controller', ['ngVis'])
 
         $scope.$on('$destroy', function () {
             $interval.cancel($scope.graphUpdate);
-            $interval.cancel(checkSwitchID);
+            $interval.cancel($scope.checkSwitchID);
         });
     });
