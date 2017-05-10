@@ -12,7 +12,7 @@ angular.module('main.controller', [])
 
         $rootScope.showMenu = false;
 
-        var location = storageService.getLocation();
+        $scope.location = storageService.getLocation();
         storageService.setSafe(true);
 
         $scope.changeView = function (view) {
@@ -47,12 +47,12 @@ angular.module('main.controller', [])
 
         var conCheck = $interval(function () {
 
-            Test('http://' + location + ':8080/wm/core/memory/json').query().$promise.then(function (data) {
+            Test('http://' + $scope.location + ':8080/wm/core/memory/json').query().$promise.then(function (data) {
 
             }, function (response) {
 
                 storageService.setSafe(false);
-                $window.alert("Connection lost with " + location);
+                $window.alert("Connection lost with " + $scope.location);
                 $location.url('/login');
                 $interval.cancel(conCheck);
                 conCheck = undefined;
